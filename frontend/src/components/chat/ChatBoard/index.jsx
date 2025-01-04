@@ -25,7 +25,7 @@ function ChatBoard() {
       setMessages((prev) => [...prev, message]);
       handleScrollToBottom();
     };
-    socket.emit("join-chat", { token, userId, friendId });
+    socket.emit("chat:join", { token, userId, friendId });
     socket.on("messages:receive", onReceiveMessages);
     socket.on("message:receive", onReceiveMessage);
     return () => {

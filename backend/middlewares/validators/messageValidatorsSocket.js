@@ -18,7 +18,7 @@ const sendMessageValidatorSocket = function ({
     return socket.emit("error", "invalid friend id"), true;
   if (!Number.isInteger(+userId))
     return socket.emit("error", "invalid user id"), true;
-  if (typeof content === "string")
+  if (typeof content !== "string")
     return socket.emit("error", "content must be a valide string"), true;
 };
 
