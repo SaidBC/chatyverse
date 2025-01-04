@@ -19,7 +19,7 @@ function ChatBox({ username, isActive, to, userId, token, friendId }) {
       console.log(lastMessage);
       setLastMessage({ content, createdAt: lastMessageTime });
     };
-    socket.emit("receive-last-message", { token, userId, friendId }, cb);
+    socket.emit("last-message:receive", { token, userId, friendId }, cb);
   }, [socket]);
   return (
     <li className={isActive && "bg-indigo-700 rounded-lg"}>

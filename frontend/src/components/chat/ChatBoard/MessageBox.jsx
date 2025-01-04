@@ -8,7 +8,7 @@ function MessageBox({ handleScrollToBottom, userId, friendId, token }) {
   const [content, setContent] = useState("");
   const handleSendMessage = function (e) {
     e.preventDefault();
-    socket.emit("send-message", { content, userId, friendId, token });
+    socket.emit("message:send", { content, userId, friendId, token });
     setContent("");
   };
 

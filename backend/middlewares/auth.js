@@ -1,4 +1,4 @@
-const passport = require("../passport_configs/passport");
+const passport = require("../configs/passport");
 const skipRoutes = require("../utils/skipRoutes");
 const BadRequestError = require("../utils/errors/BadRequestError");
 const UnauthorizedError = require("../utils/errors/UnauthorizedError");

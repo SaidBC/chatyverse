@@ -26,11 +26,11 @@ function ChatBoard() {
       handleScrollToBottom();
     };
     socket.emit("join-chat", { token, userId, friendId });
-    socket.on("receive-messages", onReceiveMessages);
-    socket.on("receive-message", onReceiveMessage);
+    socket.on("messages:receive", onReceiveMessages);
+    socket.on("message:receive", onReceiveMessage);
     return () => {
-      socket.off("receive-messages", onReceiveMessages);
-      socket.off("receive-message", onReceiveMessage);
+      socket.off("messages:receive", onReceiveMessages);
+      socket.off("message:receive", onReceiveMessage);
     };
   }, [socket, friendId]);
   return (
