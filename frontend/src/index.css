@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Inter;
+    src: local("Inter"),
+      url("./assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf")
+        format(truetype);
+  }
+  @font-face {
+    font-family: Lemon;
+    src: local("Inter"),
+      url("./assets/fonts/Lemon/Lemon-Regular.ttf") format(truetype);
+  }
+  body {
+    @apply bg-gray-800 text-white;
+    font-family: Inter;
+    min-height: 100vh;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: theme(accentColor.gray.800);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: theme(accentColor.indigo.500);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme(accentColor.indigo.600);
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px theme(accentColor.gray.700) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  /* dialog */
+  dialog::backdrop {
+    background: hsl(0 0% 0% / 50%);
+  }
+}
+
+@layer components {
+  .form-input {
+    @apply px-3 py-2.5 bg-gray-700 rounded-md border-2 border-gray-500 focus:border-indigo-400 focus:outline-none;
+  }
+  .btn {
+    @apply bg-indigo-500 hover:bg-indigo-600 text-white font-bold  text-xl py-3 rounded-md active:scale-90 flex items-center justify-center;
+    transition-property: background, transform;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-duration: 0.5s;
+  }
+}

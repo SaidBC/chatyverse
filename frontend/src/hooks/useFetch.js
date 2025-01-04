@@ -1,0 +1,27 @@
+import { useEffect, useState } from "react";
+
+function useFetch(url, opts = {}) {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(false);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    const fetching = async () => {
+      try {
+        const res = await fetch(url, opts);
+        if (res.status !== 200) return setError(await res.json());
+        const loadedData = await res.json();
+        if (loadedData.success) return setData(loadedData);
+        return setError(loadedData);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetching();
+  }, [url]);
+
+  return { loading, data, error, setLoading, setData, setError };
+}
+
+export default useFetch;
