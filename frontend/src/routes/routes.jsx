@@ -1,16 +1,16 @@
-import Login from "../components/auth/login";
-import Signup from "../components/auth/signup";
+import Login from "../pages/auth/login";
+import Signup from "../pages/auth/signup";
 import IsAuth from "../IsAuth";
-import Auth from "../components/auth";
-import Profile from "../components/Profile";
-import UserProfile from "../components/Profile/UserProfile";
-import { Outlet, useOutletContext } from "react-router-dom";
-import ChangeEmail from "../components/Profile/settings/ChangeEmail";
-import ChangePassword from "../components/Profile/settings/ChangePassword";
-import ChangeTheme from "../components/Profile/settings/ChangeTheme";
-import EditProfile from "../components/Profile/settings/EditProfile";
-import Chat from "../components/chat";
-import ChatBoard from "../components/chat/ChatBoard";
+import Auth from "../pages/auth";
+import Profile from "../pages/Profile";
+import UserProfile from "../pages/Profile/UserProfile";
+import { Outlet } from "react-router-dom";
+import ChangeEmail from "../pages/Profile/settings/ChangeEmail";
+import ChangePassword from "../pages/Profile/settings/ChangePassword";
+import ChangeTheme from "../pages/Profile/settings/ChangeTheme";
+import EditProfile from "../pages/Profile/settings/EditProfile";
+import Chat from "../pages/chat";
+import ChatBoard from "../pages/chat/ChatBoard";
 
 const routes = [
   {
