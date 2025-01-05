@@ -32,6 +32,7 @@ const updateUser = asyncHandler(async function (req, res) {
     data.password = await generatePassword(data["new-password"]);
   }
   delete data["new-password"];
+  data.birthday &&= new Date(data.birthday);
   const user = await prisma.user.update({ data, where: { id: req.user.id } });
   res.json({ success: true, data: user });
 });

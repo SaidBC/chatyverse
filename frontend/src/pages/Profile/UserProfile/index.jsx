@@ -33,6 +33,7 @@ function UserProfile({ profileImage }) {
   if (error.message === "Failed to fetch") return <>SERVER ERROR</>;
   if (error) return <>{error.error.message}</>;
   const { birthday, createdAt, location, bio, username } = user;
+  console.log(user);
   return (
     <div className=" bg-gray-900 w-full  xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">
       <div className="flex gap-4 text-4xl">
@@ -43,7 +44,7 @@ function UserProfile({ profileImage }) {
         <Avatar username={username} profileImage={profileImage} />
         <Bio bio={bio} />
       </div>
-      <About birdthday={birthday} createdAt={createdAt} location={location} />
+      <About birthday={birthday} createdAt={createdAt} location={location} />
       {isMyProfile && (
         <FooterBtns
           setData={setData}

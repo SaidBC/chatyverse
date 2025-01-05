@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ChatBox from "../../../components/ChatBox";
 import useAppContext from "../../../hooks/useAppContext";
-import IconicButton from "../../../components/Buttons/IconicButton";
+import IconButton from "../../../components/Buttons/IconButton";
 
 function FriendsModal({ onCloseModal, isModelOpen, friends, userId }) {
   const { user: token } = useAppContext();
@@ -23,7 +23,7 @@ function FriendsModal({ onCloseModal, isModelOpen, friends, userId }) {
       >
         <div className="flex justify-between pl-4 my-4">
           <h1 className="font-bold text-3xl">Friends :</h1>
-          <IconicButton
+          <IconButton
             className="hover:bg-white/20 px-3 py-1.5 text-xl rounded-md"
             type="fontawesome"
             name="fa-solid fa-xmark"

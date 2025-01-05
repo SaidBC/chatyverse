@@ -1,6 +1,9 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
+import formatDate from "../../../utils/formatDate";
 
 function About({ birthday, location, createdAt }) {
+  let joinedAt = createdAt && new Date(createdAt);
+  let birthdayDate = birthday && new Date(birthday);
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4 text-2xl">
@@ -11,15 +14,18 @@ function About({ birthday, location, createdAt }) {
         <ul className="flex flex-col gap-3">
           <li className="flex items-center gap-3">
             <SlIcon name="geo-alt-fill" />
-            <span>LIVED IN : {location || "NOT AVAILABLE"}</span>
+            <span>LIVED IN : {location || "Not provided"}</span>
           </li>
           <li className="flex items-center gap-3">
             <SlIcon name="cake2-fill" />
-            <span>BIRTH DAY : {birthday || "NOT AVAILABLE"}</span>
+            <span>
+              BIRTH DAY :{" "}
+              {(birthdayDate && formatDate(birthdayDate)) || "Not provided"}
+            </span>
           </li>
           <li className="flex items-center gap-3">
             <SlIcon name="calendar-month-fill" />
-            <span>JOINED AT {createdAt}</span>
+            <span>JOINED AT {formatDate(joinedAt)}</span>
           </li>
         </ul>
       </div>
