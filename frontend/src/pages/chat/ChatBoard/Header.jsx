@@ -2,6 +2,7 @@ import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import useFetch from "../../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import IconicButton from "../../../components/Buttons/IconicButton";
+import IconButton from "../../../components/Buttons/IconButton";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function Header() {
@@ -29,7 +30,7 @@ function Header() {
           <span className="text-xs">ONLINE</span>
         </div>
       </div>
-      <IconicButton
+      <IconButton
         className="ml-auto hover:bg-white/10 w-12 h-12 rounded-full flex justify-center items-center text-2xl"
         name="three-dots-vertical"
         type="shoelace"

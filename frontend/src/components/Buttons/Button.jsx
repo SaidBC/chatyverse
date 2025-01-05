@@ -2,7 +2,7 @@ function Button({ className, children, ...otherProps }) {
   return (
     <button
       {...otherProps}
-      className={"btn" + (className ? " " + className : "")}
+      className={(className ? className + " " : "") + "btn"}
     >
       {children}
     </button>

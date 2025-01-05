@@ -5,12 +5,10 @@ function IconicButton({ children, name, className, type, ...otherProps }) {
   return (
     <Button
       {...otherProps}
-      className={
-        " flex items-center gap-4" + (className ? " " + className : "")
-      }
+      className={(className ? className + " " : "") + "flex items-center gap-4"}
     >
       {type === "shoelace" && <SlIcon name={name} />}
-      {type === "fontawsome" && <i className={name}></i>}
+      {type === "fontawesome" && <i className={name}></i>}
       <span>{children}</span>
     </Button>
   );

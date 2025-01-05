@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import socket from "../../../socket";
 import IconicButton from "../../../components/Buttons/IconicButton";
+import IconButton from "../../../components/Buttons/IconButton";
 
 function MessageBox({ handleScrollToBottom, userId, friendId, token }) {
   const { showNav } = useOutletContext();
@@ -33,7 +34,7 @@ function MessageBox({ handleScrollToBottom, userId, friendId, token }) {
           value={content}
         />
       </div>
-      <IconicButton
+      <IconButton
         onClick={handleSendMessage}
         type="shoelace"
         name={"check-lg"}

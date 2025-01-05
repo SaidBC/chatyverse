@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
-import socket from "../../../socket";
 import ChatBox from "../../../components/ChatBox";
 import useAppContext from "../../../hooks/useAppContext";
 const SERVER_URL = "http://localhost:8000/api/v1";
