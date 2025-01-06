@@ -32,7 +32,7 @@ const onSendMessage = function (io, socket) {
   };
 };
 
-const onReceiveLastMessages = function (io, socket) {
+const onReceiveLastMessage = function (io, socket) {
   return async ({ token, userId, friendId }, cb) => {
     const isError = messageValidatorSocket({ socket, token, userId, friendId });
     if (isError) return;
@@ -89,7 +89,7 @@ const onJoinChat = function (io, socket) {
 };
 
 module.exports = {
-  onReceiveLastMessages,
+  onReceiveLastMessage,
   onJoinChat,
   onSendMessage,
 };
