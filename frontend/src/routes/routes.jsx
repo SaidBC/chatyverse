@@ -11,6 +11,7 @@ import ChangeTheme from "../pages/Profile/settings/ChangeTheme";
 import EditProfile from "../pages/Profile/settings/EditProfile";
 import Chat from "../pages/chat";
 import ChatBoard from "../pages/chat/ChatBoard";
+import NoChat from "../pages/chat/ChatBoard/NoChat";
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
     path: "/chat",
     element: <IsAuth children={<Chat />} path="/chat" />,
     children: [
+      {
+        index: true,
+        element: <NoChat />,
+      },
       {
         path: ":friendId",
         element: <ChatBoard />,

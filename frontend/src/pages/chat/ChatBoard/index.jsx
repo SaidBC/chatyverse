@@ -4,6 +4,7 @@ import Message from "./Message";
 import MessageBox from "./MessageBox";
 import socket from "../../../socket";
 import { useOutletContext, useParams } from "react-router-dom";
+import formateTime from "../../../utils/formateTime";
 
 function ChatBoard() {
   const { token, userId } = useOutletContext();
@@ -14,8 +15,8 @@ function ChatBoard() {
   const handleScrollToBottom = function () {
     ChatBoardMessagesRef?.current.scroll({
       top: 10000,
+      behavior: "smooth",
     });
-    // EndOfMessagesRef?.current.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
     const onReceiveMessages = function (messages) {
@@ -40,13 +41,11 @@ function ChatBoard() {
         <ul
           id="chat-messages"
           ref={ChatBoardMessagesRef}
-          className="flex flex-col gap-2 px-2 overflow-y-scroll max-h-96 xsm:max-h-80 "
+          className="flex flex-col gap-2 px-2 overflow-y-auto max-h-96 xsm:max-h-80 "
         >
           {messages.map((message) => {
             const sender = userId === message.authorId ? "you" : "friend";
-            const createdAt = `${new Date(
-              message.createdAt
-            ).getHours()}:${new Date(message.createdAt).getMinutes()}`;
+            const createdAt = formateTime(new Date(message.createdAt));
             return (
               <Message
                 key={message.id}

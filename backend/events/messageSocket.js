@@ -1,3 +1,4 @@
+const { last } = require("lodash");
 const isAuthSocket = require("../middlewares/isAuthSocket");
 const {
   sendMessageValidatorSocket,
@@ -61,7 +62,7 @@ const onReceiveLastMessage = function (io, socket) {
 
 const onJoinChat = function (io, socket) {
   return async ({ token, userId, friendId }) => {
-    const isError = messageValidatorSocket({ token, userId, friendId });
+    const isError = messageValidatorSocket({ socket, token, userId, friendId });
     if (isError) return;
     const isAuth = isAuthSocket({ socket, userId, token });
     if (!isAuth) return;
@@ -87,9 +88,68 @@ const onJoinChat = function (io, socket) {
     socket.emit("messages:receive", messages);
   };
 };
+const onReceiveLastMessages = function (io, socket) {
+  return async ({ token, userId }, cb) => {
+    const isAuth = isAuthSocket({ socket, userId, token });
+    if (!isAuth) return;
+    const userChats = await prisma.message.findMany({
+      where: {
+        OR: [
+          {
+            authorId: Number(userId),
+          },
+          {
+            receiverId: Number(userId),
+          },
+        ],
+      },
+      orderBy: { createdAt: "desc" },
+      distinct: ["authorId", "receiverId"],
+    });
+
+    const lastMessages = [];
+    for (const chat of userChats) {
+      const { authorId, receiverId } = chat;
+      const friendId = authorId === userId ? receiverId : authorId;
+      const friend = await prisma.user.findUnique({
+        where: {
+          id: friendId,
+        },
+        select: {
+          username: true,
+        },
+      });
+      const lastMessage = await prisma.message.findFirst({
+        where: {
+          OR: [
+            {
+              authorId: Number(userId),
+              receiverId: Number(friendId),
+            },
+            {
+              authorId: Number(friendId),
+              receiverId: Number(userId),
+            },
+          ],
+        },
+        orderBy: { createdAt: "desc" },
+      });
+      if (lastMessage) {
+        lastMessages.push({
+          authorId: friendId,
+          authorUsername: friend.username,
+          content: lastMessage.content,
+          createdAt: lastMessage.createdAt,
+        });
+      }
+    }
+    cb(lastMessages);
+  };
+};
 
 module.exports = {
   onReceiveLastMessage,
   onJoinChat,
   onSendMessage,
+  onReceiveLastMessages,
 };

@@ -1,8 +1,8 @@
 import NoFriends from "./NoFriends";
-import ChatBox from "../../../components/ChatBox";
 import useFetch from "../../../hooks/useFetch";
 import NotFoundError from "../../../components/NotFoundError";
 import Loading from "../../../components/Loading";
+import FriendBox from "../../../components/FriendBox";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function FriendsList({ token, userId }) {
@@ -24,7 +24,7 @@ function FriendsList({ token, userId }) {
       {friends?.length ? (
         friends.map((friend) => {
           return (
-            <ChatBox
+            <FriendBox
               key={friend.id}
               username={friend.username}
               to={"?id=" + friend.id}

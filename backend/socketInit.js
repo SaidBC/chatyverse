@@ -3,6 +3,7 @@ const {
   onJoinChat,
   onSendMessage,
   onReceiveLastMessage,
+  onReceiveLastMessages,
 } = require("./events/messageSocket");
 
 const socketInit = function (server) {
@@ -12,6 +13,7 @@ const socketInit = function (server) {
     socket.on("chat:join", onJoinChat(io, socket));
     socket.on("message:send", onSendMessage(io, socket));
     socket.on("last-message:receive", onReceiveLastMessage(io, socket));
+    socket.on("last-messages:receive", onReceiveLastMessages(io, socket));
   });
 };
 

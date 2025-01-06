@@ -1,26 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import socket from "../socket";
-import useConnnectUser from "../hooks/useConnectUser";
+import { Link } from "react-router-dom";
+import FormattedTimeAgo from "./FormattedTimeAgo";
 
-function ChatBox({ username, isActive, to, userId, token, friendId }) {
-  if (!userId || !token || !friendId) return;
-  const [lastMessage, setLastMessage] = useState({
-    content: "",
-    createdAt: "",
-  });
-  const connection = useConnnectUser();
-  useEffect(() => {
-    console.log(socket.connected);
-    const cb = function (content, createdAt) {
-      const lastMessageTime = `${new Date(createdAt).getHours()}:${new Date(
-        createdAt
-      ).getMinutes()}`;
-      console.log(lastMessage);
-      setLastMessage({ content, createdAt: lastMessageTime });
-    };
-    socket.emit("last-message:receive", { token, userId, friendId }, cb);
-  }, [socket]);
+function ChatBox({ username, isActive, to, lastMessage = "" }) {
   return (
     <li className={isActive && "bg-indigo-700 rounded-lg"}>
       <Link
@@ -38,7 +19,10 @@ function ChatBox({ username, isActive, to, userId, token, friendId }) {
         <div className="flex-grow">
           <div className="flex justify-between items-center">
             <span className="font-bold text-lg">{username}</span>
-            <span className="text-sm">{lastMessage.createdAt}</span>
+            <FormattedTimeAgo
+              className="text-sm"
+              date={lastMessage.createdAt}
+            />
           </div>
           <div>
             <span className="text-sm">
