@@ -2,20 +2,18 @@ import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import Bio from "./Bio";
 import Avatar from "./Avatar";
 import About from "./About";
-import {
-  useLocation,
-  useOutletContext,
-  useSearchParams,
-} from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import FooterBtns from "./FooterBtns";
 import FriendAndMessage from "./FriendAndMessage";
+import NotFoundError from "../../../components/NotFoundError";
+import Loading from "../../../components/Loading";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function UserProfile({ profileImage }) {
   const [search] = useSearchParams();
   const { decodedUser } = useOutletContext();
-  const userId = search.get("id") || decodedUser.current.id;
+  const userId = Number(search.get("id")) || decodedUser.current.id;
   const isMyProfile =
     search.get("id") == decodedUser.current.id || !search.get("id");
   const {
@@ -24,16 +22,15 @@ function UserProfile({ profileImage }) {
     loading,
     setData,
     setLoading,
-  } = useFetch(SERVER_URL + `/users/${userId}`);
-
-  const {
-    data: { data: friends },
-  } = useFetch(SERVER_URL + "/users/" + userId + "/friends");
-  if (loading) return <>Loading ....</>;
-  if (error.message === "Failed to fetch") return <>SERVER ERROR</>;
-  if (error) return <>{error.error.message}</>;
+  } = useFetch(SERVER_URL + `/users/${userId}`, {}, [userId]);
+  if (loading) return <Loading />;
+  if (error) {
+    if (error.message === "Failed to fetch") return <>SERVER ERROR</>;
+    if (error.error.name === "NotFoundError")
+      return <NotFoundError message={error.error.message} />;
+    return <>{error.error.message}</>;
+  }
   const { birthday, createdAt, location, bio, username } = user;
-  console.log(user);
   return (
     <div className=" bg-gray-900 w-full  xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">
       <div className="flex gap-4 text-4xl">
@@ -46,12 +43,7 @@ function UserProfile({ profileImage }) {
       </div>
       <About birthday={birthday} createdAt={createdAt} location={location} />
       {isMyProfile && (
-        <FooterBtns
-          setData={setData}
-          setLoading={setLoading}
-          friends={friends}
-          userId={userId}
-        />
+        <FooterBtns setData={setData} setLoading={setLoading} userId={userId} />
       )}
       {!isMyProfile && <FriendAndMessage userId={userId} />}
     </div>

@@ -8,7 +8,7 @@ function Bio({ bio }) {
         <h2 className="font-bold">BIO : </h2>
       </div>
       <div>
-        <span className="">{bio || "NO BIO ADDED"}</span>
+        <span className="">{bio || "No bio provided"}</span>
       </div>
     </div>
   );

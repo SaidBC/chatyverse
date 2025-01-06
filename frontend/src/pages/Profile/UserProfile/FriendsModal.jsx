@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import ChatBox from "../../../components/ChatBox";
 import useAppContext from "../../../hooks/useAppContext";
 import IconButton from "../../../components/Buttons/IconButton";
+import FriendsList from "./FriendsList";
 
-function FriendsModal({ onCloseModal, isModelOpen, friends, userId }) {
+function FriendsModal({ onCloseModal, isModelOpen, userId }) {
   const { user: token } = useAppContext();
   useEffect(() => {
     const onCloseWithKey = (e) => {
@@ -30,20 +30,7 @@ function FriendsModal({ onCloseModal, isModelOpen, friends, userId }) {
             onClick={onCloseModal}
           />
         </div>
-        <ul className="flex flex-col gap-2  w-full max-h-72 overflow-y-scroll">
-          {friends?.map((friend) => {
-            return (
-              <ChatBox
-                key={friend.id}
-                username={friend.username}
-                to={"?id=" + friend.id}
-                friendId={friend.id}
-                token={token}
-                userId={userId}
-              />
-            );
-          })}
-        </ul>
+        <FriendsList userId={userId} token={token} />
       </dialog>
     </>
   );

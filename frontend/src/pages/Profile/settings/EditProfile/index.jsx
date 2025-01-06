@@ -6,6 +6,8 @@ import useDecodeToken from "../../../../hooks/useDecodeToken";
 import useFetch from "../../../../hooks/useFetch";
 import saveHelper from "../../../../utils/saveHelper";
 import useAppContext from "../../../../hooks/useAppContext";
+import NotFoundError from "../../../../components/NotFoundError";
+import Loading from "../../../../components/Loading";
 
 const SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -17,8 +19,13 @@ function EditProfile() {
     error,
     loading,
   } = useFetch(SERVER_URL + `/users/${userId}`);
-  if (loading) return <>Loading ....</>;
-  if (error) return <>{error.error.message}</>;
+  if (loading) return <Loading />;
+  if (error) {
+    if (error.message === "Failed to fetch") return <>SERVER ERROR</>;
+    if (error.error.name === "NotFoundError")
+      return <NotFoundError message={error.error.message} />;
+    return <>{error.error.message}</>;
+  }
   const { birthday, location, bio, username } = user;
   const handleSave = function (data) {
     const { setShowAlert, ...form } = data;

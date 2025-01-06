@@ -1,6 +1,5 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
-import ErrorText from "../../../../components/ErrorText";
 import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
 import FormInput from "../../../../components/Inputs/FormInput";
@@ -11,7 +10,7 @@ function AboutForm({
   location: locationInitial,
 }) {
   const [birthday, setBirthday] = useState({
-    value: birthdayInitial || "",
+    value: birthdayInitial?.slice(0, 10) || "",
     errorMessage: false,
   });
   const [location, setLocation] = useState({

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useFetch(url, opts = {}) {
+function useFetch(url, opts = {}, deps = []) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(false);
   const [error, setError] = useState(false);
@@ -19,7 +19,12 @@ function useFetch(url, opts = {}) {
       }
     };
     fetching();
-  }, [url]);
+    return () => {
+      setData(false);
+      setError(false);
+      setLoading(true);
+    };
+  }, [url, ...deps]);
 
   return { loading, data, error, setLoading, setData, setError };
 }
