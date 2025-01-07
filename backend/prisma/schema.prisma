@@ -22,7 +22,7 @@ model User {
   birthday           DateTime?
   location           String?
   bio                String?
-  profilePicture     String?
+  profilePicture     String          @default("https://cdn-icons-png.flaticon.com/512/3135/3135768.png")
   sentToFriends      FriendRequest[] @relation("sender")
   receivedFromFiends FriendRequest[] @relation("receiver")
   friends            User[]          @relation("friends")
