@@ -8,6 +8,7 @@ import FooterBtns from "./FooterBtns";
 import FriendAndMessage from "./FriendAndMessage";
 import NotFoundError from "../../../components/NotFoundError";
 import Loading from "../../../components/Loading";
+import InternalServerError from "../../../components/InternalServerError";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function UserProfile() {
@@ -25,10 +26,11 @@ function UserProfile() {
   } = useFetch(SERVER_URL + `/users/${userId}`, {}, [userId]);
   if (loading) return <Loading />;
   if (error) {
-    if (error.message === "Failed to fetch") return <>SERVER ERROR</>;
+    if (error.message === "Failed to fetch")
+      return <InternalServerError message={"SERVER ERROR"} />;
     if (error.error.name === "NotFoundError")
       return <NotFoundError message={error.error.message} />;
-    return <>{error.error.message}</>;
+    return <InternalServerError message={error.error.message} />;
   }
   const { birthday, createdAt, location, bio, username, profilePicture } = user;
   return (

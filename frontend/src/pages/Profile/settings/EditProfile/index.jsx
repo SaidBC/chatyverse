@@ -9,6 +9,7 @@ import useAppContext from "../../../../hooks/useAppContext";
 import NotFoundError from "../../../../components/NotFoundError";
 import Loading from "../../../../components/Loading";
 import UsernameForm from "./UsernameForm";
+import InternalServerError from "../../../../components/InternalServerError";
 
 const SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -22,10 +23,11 @@ function EditProfile() {
   } = useFetch(SERVER_URL + `/users/${userId}`);
   if (loading) return <Loading />;
   if (error) {
-    if (error.message === "Failed to fetch") return <>SERVER ERROR</>;
+    if (error.message === "Failed to fetch")
+      return <InternalServerError message={"SERVER ERROR"} />;
     if (error.error.name === "NotFoundError")
       return <NotFoundError message={error.error.message} />;
-    return <>{error.error.message}</>;
+    return <InternalServerError message={error.error.message} />;
   }
   const { birthday, location, bio, username, profilePicture } = user;
   const handleSave = function (data) {
