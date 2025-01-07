@@ -23,6 +23,7 @@ function LastMessagesList({ token, userId }) {
                 content: message.content,
                 createdAt: new Date(message.createdAt),
               }}
+              profilePicture={message.authorProfilePicture}
             />
           );
         })

@@ -31,6 +31,7 @@ function FriendsList({ token, userId }) {
               friendId={friend.id}
               token={token}
               userId={userId}
+              profilePicture={friend.profilePicture}
             />
           );
         })

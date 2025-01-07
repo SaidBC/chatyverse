@@ -117,6 +117,7 @@ const onReceiveLastMessages = function (io, socket) {
         },
         select: {
           username: true,
+          profilePicture: true,
         },
       });
       const lastMessage = await prisma.message.findFirst({
@@ -138,6 +139,7 @@ const onReceiveLastMessages = function (io, socket) {
         lastMessages.push({
           authorId: friendId,
           authorUsername: friend.username,
+          authorProfilePicture: friend.profilePicture,
           content: lastMessage.content,
           createdAt: lastMessage.createdAt,
         });

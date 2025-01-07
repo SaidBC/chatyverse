@@ -48,6 +48,7 @@ const userAllFriends = asyncHandler(async function (req, res) {
     select: {
       id: true,
       username: true,
+      profilePicture: true,
     },
   };
   const { friendId } = req.query;
