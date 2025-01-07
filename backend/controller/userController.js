@@ -5,7 +5,22 @@ const { handleUpload } = require("../utils/handleUpload");
 const BadRequestError = require("../utils/errors/BadRequestError");
 
 const getAllUsers = asyncHandler(async function (req, res) {
-  const users = await prisma.user.findMany({});
+  const { username } = req.query;
+  const { role } = req;
+  const where = {};
+  if (username) {
+    where.username = {
+      contains: username,
+      mode: "insensitive",
+    };
+  }
+  const select = {};
+  if (role !== "ADMIN") {
+    select.id = true;
+    select.username = true;
+    select.profilePicture = true;
+  }
+  const users = await prisma.user.findMany({ where, select });
   res.json({ success: true, data: users });
 });
 
