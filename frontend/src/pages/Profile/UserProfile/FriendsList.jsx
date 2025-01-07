@@ -21,7 +21,7 @@ function FriendsList({ token, userId }) {
   }
   return (
     <ul className="flex flex-col gap-2  w-full max-h-72 overflow-y-auto">
-      {friends?.length ? (
+      {friends && friends.length ? (
         friends.map((friend) => {
           return (
             <FriendBox

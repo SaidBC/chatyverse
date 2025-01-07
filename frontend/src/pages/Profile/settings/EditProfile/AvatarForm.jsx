@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
 import axios, { AxiosError } from "axios";
+import AvatarImage from "../../../../components/AvatarImage";
 
 const SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -91,14 +92,12 @@ function AvatarForm({ profilePicture, userId, token }) {
           <h2 className="font-bold">AVATAR : </h2>
         </div>
         <div className="flex flex-col gap-1">
-          <div className="relative w-32 h-32 bg-gray-950 rounded-full">
-            <img
-              ref={imgRef}
-              className="w-full h-full rounded-full"
-              src={profilePicture}
-              alt="profile image"
-            />
-          </div>
+          <AvatarImage
+            ref={imgRef}
+            src={profilePicture}
+            className="relative w-32 h-32 bg-gray-950 rounded-full"
+            alt="profile image"
+          />
           <div className="flex">
             <input
               type="file"

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import ChatBox from "./ChatBox";
-import useConnnectUser from "../hooks/useConnectUser";
 import socket from "../socket";
+import PulseBox from "./PulseBox";
 
 function FriendBox({
   username,
@@ -17,27 +17,29 @@ function FriendBox({
     content: "",
     createdAt: "",
   });
-  const connection = socket.connected || useConnnectUser();
   useEffect(() => {
     const cb = function (content, createdAt) {
-      const lastMessageTime = `${new Date(createdAt).getHours()}:${new Date(
-        createdAt
-      ).getMinutes()}`;
-      setLastMessage({ content, createdAt: lastMessageTime });
+      setLastMessage({ content, createdAt: new Date(createdAt) });
     };
     socket.emit("last-message:receive", { token, userId, friendId }, cb);
   }, [socket]);
   return (
-    <ChatBox
-      userId={userId}
-      token={token}
-      friendId={friendId}
-      profilePicture={profilePicture}
-      lastMessage={lastMessage}
-      username={username}
-      isActive={isActive}
-      to={to}
-    />
+    <>
+      {lastMessage.createdAt !== "" ? (
+        <ChatBox
+          userId={userId}
+          token={token}
+          friendId={friendId}
+          profilePicture={profilePicture}
+          lastMessage={lastMessage}
+          username={username}
+          isActive={isActive}
+          to={to}
+        />
+      ) : (
+        <PulseBox />
+      )}
+    </>
   );
 }
 

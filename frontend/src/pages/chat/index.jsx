@@ -3,10 +3,8 @@ import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import useAppContext from "../../hooks/useAppContext";
 import useDecodeToken from "../../hooks/useDecodeToken";
-import useConnnectUser from "../../hooks/useConnectUser";
 
 function Chat() {
-  const connection = useConnnectUser();
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
   const { user: token } = useAppContext();

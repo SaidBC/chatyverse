@@ -3,7 +3,6 @@ const SERVER_URL = "http://localhost:8000/api/v1";
 const friendRequestHandle = async function (path, token, setShowAlert) {
   const requestUrl = SERVER_URL + path;
   try {
-    console.log(requestUrl);
     const res = await fetch(requestUrl, {
       method: "POST",
       headers: {
