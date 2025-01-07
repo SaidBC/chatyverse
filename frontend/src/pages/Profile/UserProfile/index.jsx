@@ -10,7 +10,7 @@ import NotFoundError from "../../../components/NotFoundError";
 import Loading from "../../../components/Loading";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
-function UserProfile({ profileImage }) {
+function UserProfile() {
   const [search] = useSearchParams();
   const { decodedUser } = useOutletContext();
   const userId = Number(search.get("id")) || decodedUser.current.id;
@@ -30,7 +30,7 @@ function UserProfile({ profileImage }) {
       return <NotFoundError message={error.error.message} />;
     return <>{error.error.message}</>;
   }
-  const { birthday, createdAt, location, bio, username } = user;
+  const { birthday, createdAt, location, bio, username, profilePicture } = user;
   return (
     <div className=" bg-gray-900 w-full  xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">
       <div className="flex gap-4 text-4xl">
@@ -38,7 +38,7 @@ function UserProfile({ profileImage }) {
         <h1 className="font-extrabold">PROFILE</h1>
       </div>
       <div className="flex flex-col lg:flex-row lg:px-8 gap-10 lg:items-center">
-        <Avatar username={username} profileImage={profileImage} />
+        <Avatar username={username} profilePicture={profilePicture} />
         <Bio bio={bio} />
       </div>
       <About birthday={birthday} createdAt={createdAt} location={location} />

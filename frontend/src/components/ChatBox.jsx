@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import FormattedTimeAgo from "./FormattedTimeAgo";
 
-function ChatBox({ username, isActive, to, lastMessage = "" }) {
+function ChatBox({ username, profilePicture, isActive, to, lastMessage = "" }) {
   return (
     <li className={isActive && "bg-indigo-700 rounded-lg"}>
       <Link
@@ -11,8 +11,8 @@ function ChatBox({ username, isActive, to, lastMessage = "" }) {
         <div className="relative w-16 h-16 bg-gray-950 rounded-full">
           <img
             className="w-full h-full rounded-full"
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png"
-            alt="profile image"
+            src={profilePicture}
+            alt="profile picture"
           />
           <div></div>
         </div>

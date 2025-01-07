@@ -1,24 +1,91 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
-import { useState } from "react";
-import ErrorText from "../../../../components/ErrorText";
+import { useRef, useState } from "react";
 import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
-import FormInput from "../../../../components/Inputs/FormInput";
+import axios, { AxiosError } from "axios";
 
-function AvatarForm({ handleSave, username: initialUsername }) {
-  const [username, setUsername] = useState({
-    value: initialUsername || "",
-    errorMessage: false,
-  });
+const SERVER_URL = "http://localhost:8000/api/v1";
+
+function AvatarForm({ profilePicture, userId, token }) {
   const [showAlert, setShowAlert] = useState({
     isPopped: false,
     title: "",
     content: "",
     variant: "",
   });
+  const [file, setFile] = useState(null);
+  const handleUpload = function (e) {
+    e.preventDefault();
+    if (!file)
+      return setShowAlert({
+        isPopped: true,
+        title: "Failed",
+        variant: "error",
+        content: "Please select a image",
+      });
+    if (!file.type.startsWith("image")) {
+      return setShowAlert({
+        isPopped: true,
+        title: "Failed",
+        variant: "error",
+        content: "Uploaded file should be a image",
+      });
+    }
+    const data = new FormData();
+    data.set("avatar", file);
+
+    axios
+      .post(SERVER_URL + "/users/" + userId + "/upload", data, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        if (res.status !== 200)
+          return setShowAlert({
+            isPopped: true,
+            title: "Failed",
+            variant: "error",
+            content: "Internal Server Error",
+          });
+        if (!res.data.success)
+          return setShowAlert({
+            isPopped: true,
+            title: "Failed",
+            variant: "error",
+            content: res.data.error.message,
+          });
+        setShowAlert({
+          isPopped: true,
+          title: "Failed",
+          variant: "success",
+          content: res.data.data,
+        });
+      })
+      .catch((err) => {
+        setShowAlert({
+          isPopped: true,
+          title: "Failed",
+          variant: "error",
+          content: err.message,
+        });
+      });
+  };
+  const imgRef = useRef(null);
+  const handleSelectingFile = function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setFile(file);
+    if (!file.type.startsWith("image")) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imgRef.current.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
   return (
     <>
-      <form className="flex flex-col gap-4" action="" method="post">
+      <form className="flex flex-col gap-4" method="post">
         <div className="flex items-center gap-4 text-2xl">
           <SlIcon name="person-square" />
           <h2 className="font-bold">AVATAR : </h2>
@@ -26,25 +93,25 @@ function AvatarForm({ handleSave, username: initialUsername }) {
         <div className="flex flex-col gap-1">
           <div className="relative w-32 h-32 bg-gray-950 rounded-full">
             <img
+              ref={imgRef}
               className="w-full h-full rounded-full"
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png"
+              src={profilePicture}
               alt="profile image"
             />
           </div>
-          <input type="file" />
+          <div className="flex">
+            <input
+              type="file"
+              onChange={handleSelectingFile}
+              name="avatar"
+              id="avatar"
+              multiple={false}
+            />
+            <Button className="px-6" onClick={handleUpload}>
+              UPLOAD
+            </Button>
+          </div>
         </div>
-        <FormInput
-          label="Username :"
-          name="username"
-          type="text"
-          setInput={setUsername}
-          placeholder="Enter your new username"
-          errorMessage={username.errorMessage}
-          value={username.value}
-        />
-        <Button onClick={handleSave({ username, setUsername, setShowAlert })}>
-          SAVE
-        </Button>
       </form>
       {showAlert.isPopped && (
         <AlertPopup alert={showAlert} setShowAlert={setShowAlert} />

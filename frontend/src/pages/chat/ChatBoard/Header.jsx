@@ -1,7 +1,5 @@
-import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import useFetch from "../../../hooks/useFetch";
 import { useParams } from "react-router-dom";
-import IconicButton from "../../../components/Buttons/IconicButton";
 import IconButton from "../../../components/Buttons/IconButton";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -17,7 +15,7 @@ function Header() {
       <div className="relative w-14 h-14 bg-gray-950 rounded-full">
         <img
           className="w-full h-full rounded-full"
-          src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png"
+          src={friend.profilePicture}
           alt="profile image"
         />
         <div></div>

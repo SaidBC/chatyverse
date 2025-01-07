@@ -8,6 +8,7 @@ import saveHelper from "../../../../utils/saveHelper";
 import useAppContext from "../../../../hooks/useAppContext";
 import NotFoundError from "../../../../components/NotFoundError";
 import Loading from "../../../../components/Loading";
+import UsernameForm from "./UsernameForm";
 
 const SERVER_URL = "http://localhost:8000/api/v1";
 
@@ -26,7 +27,7 @@ function EditProfile() {
       return <NotFoundError message={error.error.message} />;
     return <>{error.error.message}</>;
   }
-  const { birthday, location, bio, username } = user;
+  const { birthday, location, bio, username, profilePicture } = user;
   const handleSave = function (data) {
     const { setShowAlert, ...form } = data;
     return function (e) {
@@ -42,7 +43,12 @@ function EditProfile() {
         <h1 className="font-extrabold">EDIT PROFILE</h1>
       </div>
       <div className="max-w-[30rem] flex flex-col gap-4">
-        <AvatarForm username={username} handleSave={handleSave} />
+        <AvatarForm
+          profilePicture={profilePicture}
+          token={token}
+          userId={userId}
+        />
+        <UsernameForm username={username} handleSave={handleSave} />
         <AboutForm
           birthday={birthday}
           location={location}
