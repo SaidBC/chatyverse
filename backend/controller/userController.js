@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const prisma = require("../utils/prisma");
 const generatePassword = require("../utils/generantePassword");
+const { handleUpload } = require("../utils/handleUpload");
 
 const getAllUsers = asyncHandler(async function (req, res) {
   const users = await prisma.user.findMany({});
@@ -57,6 +58,20 @@ const userAllFriends = asyncHandler(async function (req, res) {
   res.json({ success: true, data: friends });
 });
 
+const uploadUserPicture = asyncHandler(async (req, res) => {
+  const { buffer, mimetype } = req.file;
+  const b64 = Buffer.from(buffer).toString("base64");
+  const dataUri = "data:" + mimetype + ";base64," + b64;
+  const cldRes = await handleUpload(dataUri);
+  const user = await prisma.user.update({
+    where: { id: Number(req.params.id) },
+    data: {
+      profilePicture: cldRes.url,
+    },
+  });
+  res.json({ success: true, data: "Profile image upload was done" });
+});
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -64,4 +79,5 @@ module.exports = {
   updateUser,
   getUser,
   userAllFriends,
+  uploadUserPicture,
 };

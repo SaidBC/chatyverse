@@ -22,6 +22,7 @@ model User {
   birthday           DateTime?
   location           String?
   bio                String?
+  profilePicture     String?
   sentToFriends      FriendRequest[] @relation("sender")
   receivedFromFiends FriendRequest[] @relation("receiver")
   friends            User[]          @relation("friends")
