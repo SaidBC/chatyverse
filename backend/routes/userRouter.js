@@ -41,6 +41,7 @@ userRouter
 userRouter.post(
   "/users/:userId/upload",
   isUserExists,
+  auth,
   upload.single("avatar"),
   uploadUserPicture
 );
