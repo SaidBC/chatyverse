@@ -55,7 +55,7 @@ const onReceiveLastMessage = function (io, socket) {
 
       orderBy: { createdAt: "desc" },
     });
-    if (!lastMessage) return socket.emit("error", "Messages not found");
+    if (!lastMessage) return cb(null, null);
     cb(lastMessage.content, lastMessage.createdAt);
   };
 };

@@ -17,15 +17,20 @@ function ChatBox({ username, profilePicture, isActive, to, lastMessage = "" }) {
         <div className="flex-grow">
           <div className="flex justify-between items-center">
             <span className="font-bold text-lg">{username}</span>
-            <FormattedTimeAgo
-              className="text-sm"
-              date={lastMessage.createdAt}
-            />
+
+            {lastMessage.createdAt != null && (
+              <FormattedTimeAgo
+                className="text-sm"
+                date={new Date(lastMessage.createdAt)}
+              />
+            )}
           </div>
           <div>
             <span className="text-sm">
               {lastMessage.content === ""
                 ? "Empty message"
+                : lastMessage.content === null
+                ? "No messages sent"
                 : lastMessage.content}
             </span>
           </div>

@@ -17,15 +17,20 @@ function FriendBox({
     content: "",
     createdAt: "",
   });
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const cb = function (content, createdAt) {
-      setLastMessage({ content, createdAt: new Date(createdAt) });
+      setLastMessage({ content, createdAt: createdAt });
+      setLoading(false);
     };
     socket.emit("last-message:receive", { token, userId, friendId }, cb);
+    return () => {
+      setLoading(true);
+    };
   }, [socket]);
   return (
     <>
-      {lastMessage.createdAt !== "" ? (
+      {!loading ? (
         <ChatBox
           userId={userId}
           token={token}

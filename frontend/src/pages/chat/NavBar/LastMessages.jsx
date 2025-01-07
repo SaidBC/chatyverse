@@ -21,7 +21,7 @@ function LastMessagesList({ token, userId }) {
               to={`${message.authorId}`}
               lastMessage={{
                 content: message.content,
-                createdAt: new Date(message.createdAt),
+                createdAt: message.createdAt,
               }}
               profilePicture={message.authorProfilePicture}
             />
