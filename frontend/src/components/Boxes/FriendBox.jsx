@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import ChatBox from "../Boxes/ChatBox";
-import socket from "../socket";
-import PulseBox from "./Boxes/PulseBox";
+import ChatBox from "./ChatBox";
+import socket from "../../socket";
+import PulseBox from "./PulseBox";
 
 function FriendBox({
   username,

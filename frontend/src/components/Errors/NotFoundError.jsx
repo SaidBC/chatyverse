@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import NotFoundImage from "../assets/images/rb_5529.png";
+import NotFoundImage from "../../assets/images/rb_5529.png";
 function NotFoundError({ message }) {
   return (
     <div className="flex flex-col gap-8 items-center mt-20 bg-gray-700 rounded-lg p-10">

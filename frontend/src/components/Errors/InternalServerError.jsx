@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import InternalServerErrorImage from "../assets/images/rb_5572.png";
+import InternalServerErrorImage from "../../assets/images/rb_5572.png";
 function InternalServerError({ message }) {
   return (
     <div className="flex flex-col gap-8 items-center mt-20 bg-gray-700 rounded-lg p-10">

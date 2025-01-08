@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import FormattedTimeAgo from "./FormattedTimeAgo";
-import AvatarImage from "./AvatarImage";
+import FormattedTimeAgo from "../FormattedTimeAgo";
+import AvatarImage from "../AvatarImage";
 
 function ChatBox({
   online,
