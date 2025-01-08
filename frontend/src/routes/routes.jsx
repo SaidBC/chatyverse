@@ -20,7 +20,11 @@ const routes = [
   },
   {
     path: "/chat",
-    element: <IsAuth children={<Chat />} path="/chat" />,
+    element: (
+      <IsAuth path="/chat">
+        <Chat />
+      </IsAuth>
+    ),
     children: [
       {
         index: true,
@@ -34,7 +38,11 @@ const routes = [
   },
   {
     path: "/profile",
-    element: <IsAuth children={<Profile />} path="/profile" />,
+    element: (
+      <IsAuth path="/profile">
+        <Profile />
+      </IsAuth>
+    ),
     children: [
       {
         index: true,
@@ -66,7 +74,11 @@ const routes = [
   },
   {
     path: "/auth",
-    element: <IsAuth children={<Auth />} path="/auth" />,
+    element: (
+      <IsAuth path="/auth">
+        <Auth />
+      </IsAuth>
+    ),
     children: [
       {
         path: "login",

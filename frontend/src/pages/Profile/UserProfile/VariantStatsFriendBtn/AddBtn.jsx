@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import IconicButton from "../../../../components/Buttons/IconicButton";
 
 function AddBtn({ receiverId, handleClick }) {
@@ -12,5 +13,10 @@ function AddBtn({ receiverId, handleClick }) {
     </IconicButton>
   );
 }
+
+AddBtn.propTypes = {
+  receiverId: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default AddBtn;

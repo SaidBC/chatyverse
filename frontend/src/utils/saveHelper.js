@@ -1,8 +1,14 @@
 import checkErrors from "./checkErrors";
 import validateForm from "./validateForm";
 
-const saveHelper = async function (form, userId, token, setUser, setShowAlert) {
-  const SERVER_URL = "http://localhost:8000/api/v1";
+const saveHelper = async function (
+  form,
+  userId,
+  token,
+  setToken,
+  setShowAlert
+) {
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
   const errors = validateForm(form);
   if (errors.length) return checkErrors(errors, form);
   for (const key in form) {

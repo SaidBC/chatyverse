@@ -1,4 +1,5 @@
-import { createRef, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import ChatBox from "./ChatBox";
 import socket from "../socket";
 import PulseBox from "./PulseBox";
@@ -13,7 +14,6 @@ function FriendBox({
   friendId,
   online,
 }) {
-  if (!userId || !token || !friendId) return;
   const [lastMessage, setLastMessage] = useState({
     content: "",
     createdAt: "",
@@ -29,7 +29,7 @@ function FriendBox({
       socket.off("last-message:receive", cb);
       setLoading(true);
     };
-  }, [socket]);
+  }, [userId, token, friendId]);
   return (
     <>
       {!loading ? (
@@ -50,5 +50,20 @@ function FriendBox({
     </>
   );
 }
+
+FriendBox.propTypes = {
+  userId: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  friendId: PropTypes.string.isRequired,
+  profilePicture: PropTypes.string.isRequired,
+  lastMessage: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+  }).isRequired,
+  username: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  to: PropTypes.string.isRequired,
+  online: PropTypes.bool.isRequired,
+};
 
 export default FriendBox;

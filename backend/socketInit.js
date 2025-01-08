@@ -15,7 +15,7 @@ const socketInit = function (server) {
     socket.on("app:connect", async (userId, token) => {
       const isAuth = isAuthSocket({ socket, userId, token });
       if (!isAuth) return;
-      const user = await prisma.user.update({
+      await prisma.user.update({
         where: { id: userId },
         data: {
           online: true,
@@ -26,7 +26,7 @@ const socketInit = function (server) {
       socket.on("last-message:receive", onReceiveLastMessage(io, socket));
       socket.on("last-messages:receive", onReceiveLastMessages(io, socket));
       socket.on("disconnect", async () => {
-        const user = await prisma.user.update({
+        await prisma.user.update({
           where: { id: userId },
           data: {
             online: false,

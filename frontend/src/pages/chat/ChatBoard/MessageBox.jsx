@@ -1,11 +1,11 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import socket from "../../../socket";
-import IconicButton from "../../../components/Buttons/IconicButton";
 import IconButton from "../../../components/Buttons/IconButton";
 
-function MessageBox({ handleScrollToBottom, userId, friendId, token }) {
+function MessageBox({ userId, friendId, token }) {
   const { showNav } = useOutletContext();
   const [content, setContent] = useState("");
   const handleSendMessage = function (e) {
@@ -43,5 +43,11 @@ function MessageBox({ handleScrollToBottom, userId, friendId, token }) {
     </form>
   );
 }
+
+MessageBox.propTypes = {
+  userId: PropTypes.string.isRequired,
+  friendId: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+};
 
 export default MessageBox;

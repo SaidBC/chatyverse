@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import SearchBox from "./SearchBox";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
@@ -30,5 +31,10 @@ function NavBar({ userId, connection }) {
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  userId: PropTypes.string.isRequired,
+  connection: PropTypes.object.isRequired,
+};
 
 export default NavBar;

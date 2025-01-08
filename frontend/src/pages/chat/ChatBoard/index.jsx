@@ -33,7 +33,7 @@ function ChatBoard() {
       socket.off("messages:receive", onReceiveMessages);
       socket.off("message:receive", onReceiveMessage);
     };
-  }, [socket, friendId]);
+  }, [token, userId, friendId]);
   return (
     <div className="flex flex-col w-full xsm:w-11/12 min-h-96 h-full xsm:h-auto  bg-gray-900 xsm:mt-14 xsm:rounded-3xl pb-5">
       <Header />

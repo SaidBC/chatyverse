@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import formatDate from "../../../utils/formatDate";
 
@@ -32,5 +33,11 @@ function About({ birthday, location, createdAt }) {
     </div>
   );
 }
+
+About.propTypes = {
+  birthday: PropTypes.string,
+  location: PropTypes.string,
+  createdAt: PropTypes.string.isRequired,
+};
 
 export default About;

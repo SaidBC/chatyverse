@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import ErrorText from "../ErrorText";
 import Input from "./Input";
 
@@ -17,5 +18,11 @@ function FormInput({ className, errorMessage, setInput, ...otherProps }) {
     </Input>
   );
 }
+
+FormInput.propTypes = {
+  className: PropTypes.string,
+  errorMessage: PropTypes.string,
+  setInput: PropTypes.func.isRequired,
+};
 
 export default FormInput;

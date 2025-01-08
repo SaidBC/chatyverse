@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import useAppContext from "../../hooks/useAppContext";
 
 function Profile() {
-  const { token, user, isConnected } = useAppContext();
+  const { user, isConnected } = useAppContext();
   if (!isConnected) return <>Connecting ...</>;
   return (
     <div className="flex min-h-[100dvh]">

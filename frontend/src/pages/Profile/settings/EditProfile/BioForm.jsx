@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
 import ErrorText from "../../../../components/ErrorText";
@@ -48,5 +49,10 @@ function BioForm({ handleSave, bio: bioInitial }) {
     </>
   );
 }
+
+BioForm.propTypes = {
+  handleSave: PropTypes.func.isRequired,
+  bio: PropTypes.string.isRequired,
+};
 
 export default BioForm;

@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./routes/routes.jsx";
-import { createContext, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 import decodeToken from "./utils/decodeToken.js";
 import useConnnectUser from "./hooks/useConnectUser.js";
+import AppContext from "./contexts/AppContext.jsx";
 
 const router = createBrowserRouter(routes);
-export const AppContext = createContext({ user: false });
 
 function App() {
   const [token, setToken] = useLocalStorage("token", null);
@@ -16,7 +16,7 @@ function App() {
     if (token) {
       setUser(decodeToken(token));
     }
-  }, [token]);
+  }, [setUser, token]);
   const value = useMemo(
     () => ({ token, setToken, user, setUser, isConnected }),
     [token, setToken, user, setUser, isConnected]

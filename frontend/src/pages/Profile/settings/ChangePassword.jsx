@@ -7,7 +7,7 @@ import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
 function ChangePassword() {
-  const { setToken, user } = useAppContext();
+  const { setToken, user, token } = useAppContext();
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",

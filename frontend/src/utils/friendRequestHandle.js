@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const friendRequestHandle = async function (path, token, setShowAlert) {
   const requestUrl = SERVER_URL + path;

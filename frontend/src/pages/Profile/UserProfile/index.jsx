@@ -2,7 +2,7 @@ import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import Bio from "./Bio";
 import Avatar from "./Avatar";
 import About from "./About";
-import { useOutletContext, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import FooterBtns from "./FooterBtns";
 import FriendAndMessage from "./FriendAndMessage";
@@ -10,7 +10,7 @@ import NotFoundError from "../../../components/NotFoundError";
 import Loading from "../../../components/Loading";
 import InternalServerError from "../../../components/InternalServerError";
 import useAppContext from "../../../hooks/useAppContext";
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function UserProfile() {
   const [search] = useSearchParams();

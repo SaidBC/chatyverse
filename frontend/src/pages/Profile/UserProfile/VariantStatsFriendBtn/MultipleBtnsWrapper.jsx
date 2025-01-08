@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import IconicButton from "../../../../components/Buttons/IconicButton";
 
@@ -25,5 +26,10 @@ function MultipleBtnsWrapper({ children, title }) {
     </>
   );
 }
+
+MultipleBtnsWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default MultipleBtnsWrapper;

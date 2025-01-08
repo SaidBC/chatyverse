@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import socket from "../socket";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:8000/api/v1";
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 function useConnnectUser({ token, userId }) {
   const [isConnected, setIsConnected] = useState(false);
   useEffect(() => {

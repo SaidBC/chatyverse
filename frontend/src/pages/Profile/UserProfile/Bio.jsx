@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 
 function Bio({ bio }) {
@@ -13,4 +14,9 @@ function Bio({ bio }) {
     </div>
   );
 }
+
+Bio.propTypes = {
+  bio: PropTypes.string,
+};
+
 export default Bio;

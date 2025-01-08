@@ -1,5 +1,4 @@
-import useFetch from "../../../hooks/useFetch";
-import ChatBox from "../../../components/ChatBox";
+import PropTypes from "prop-types";
 import useAppContext from "../../../hooks/useAppContext";
 import FriendsList from "../../Profile/UserProfile/FriendsList";
 import LastMessagesList from "./LastMessages";
@@ -36,4 +35,12 @@ function ChatBoxes({ userId, isSearching, results, connection }) {
     </ul>
   );
 }
+
+ChatBoxes.propTypes = {
+  userId: PropTypes.string.isRequired,
+  isSearching: PropTypes.bool.isRequired,
+  results: PropTypes.array.isRequired,
+  connection: PropTypes.object.isRequired,
+};
+
 export default ChatBoxes;

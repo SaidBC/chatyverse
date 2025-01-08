@@ -1,7 +1,7 @@
 import useFetch from "../../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import IconButton from "../../../components/Buttons/IconButton";
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function Header() {
   const { friendId } = useParams();

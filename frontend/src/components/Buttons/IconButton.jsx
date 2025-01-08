@@ -1,6 +1,7 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
+import PropTypes from "prop-types";
 
-function IconButton({ children, name, type, ...otherProps }) {
+function IconButton({ name, type, ...otherProps }) {
   return (
     <button {...otherProps}>
       {type === "shoelace" && <SlIcon name={name} />}
@@ -8,5 +9,10 @@ function IconButton({ children, name, type, ...otherProps }) {
     </button>
   );
 }
+
+IconButton.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["shoelace", "fontawesome"]).isRequired,
+};
 
 export default IconButton;

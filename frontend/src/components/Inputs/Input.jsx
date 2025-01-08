@@ -1,5 +1,4 @@
-import React from "react";
-
+import PropTypes from "prop-types";
 const Input = ({
   name,
   label,
@@ -28,6 +27,16 @@ const Input = ({
       {children}
     </div>
   );
+};
+
+Input.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Input;

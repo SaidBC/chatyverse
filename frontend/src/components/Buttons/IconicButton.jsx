@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import Button from "./Button";
 
@@ -13,5 +14,12 @@ function IconicButton({ children, name, className, type, ...otherProps }) {
     </Button>
   );
 }
+
+IconicButton.propTypes = {
+  children: PropTypes.node,
+  name: PropTypes.string,
+  className: PropTypes.string,
+  type: PropTypes.oneOf(["shoelace", "fontawesome"]),
+};
 
 export default IconicButton;

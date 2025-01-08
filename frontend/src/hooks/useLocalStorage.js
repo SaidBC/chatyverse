@@ -7,8 +7,9 @@ function useLocalStorage(key, value) {
       const storageValue = window.localStorage.getItem(key);
       if (storageValue) return parse(storageValue);
       window.localStorage.setItem(key, stringify(value));
-      return parse(value);
+      return value;
     } catch (error) {
+      console.error(error);
       window.localStorage.setItem(key, stringify(value));
       return value;
     }

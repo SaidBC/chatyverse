@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const senderStyle = {
   friend: {
     li: "self-start bg-indigo-500",
@@ -21,5 +22,11 @@ function Message({ content, createdAt, sender }) {
     </li>
   );
 }
+
+Message.propTypes = {
+  content: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  sender: PropTypes.oneOf(["friend", "you"]).isRequired,
+};
 
 export default Message;

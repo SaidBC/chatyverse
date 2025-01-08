@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAppContext from "../../../hooks/useAppContext";
 import VariantStatsFriendBtn from "./VariantStatsFriendBtn";
 import useFetchAll from "../../../hooks/useFetchAll";
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function FriendAndMessage({ userId }) {
   const { token, user } = useAppContext();
@@ -47,5 +48,9 @@ function FriendAndMessage({ userId }) {
     </div>
   );
 }
+
+FriendAndMessage.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
 
 export default FriendAndMessage;

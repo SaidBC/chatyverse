@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import friendRequestHandle from "../../../../utils/friendRequestHandle";
 import PropTypes from "prop-types";
 import AddBtn from "./AddBtn";
@@ -47,6 +47,8 @@ function VariantStatsFriendBtn({ token, userId, type }) {
 }
 
 VariantStatsFriendBtn.propTypes = {
-  type: PropTypes.oneOf(["none", "friend", "sent", "request"]),
+  type: PropTypes.oneOf(["none", "friend", "sent", "request"]).isRequired,
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 export default VariantStatsFriendBtn;

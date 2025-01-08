@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import IconicButton from "../../../../components/Buttons/IconicButton";
 
@@ -16,5 +17,10 @@ function AcceptBtn({ senderId, handleClick }) {
     </IconicButton>
   );
 }
+
+AcceptBtn.propTypes = {
+  senderId: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default AcceptBtn;

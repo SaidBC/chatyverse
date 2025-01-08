@@ -1,6 +1,5 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
-import { useRef, useState } from "react";
-import ErrorText from "../../../components/ErrorText";
+import { useState } from "react";
 import saveHelper from "../../../utils/saveHelper";
 import useAppContext from "../../../hooks/useAppContext";
 import AlertPopup from "../../../components/AlertPopup";
@@ -8,7 +7,7 @@ import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
 function ChangeEmail() {
-  const { setToken, user } = useAppContext();
+  const { setToken, user, token } = useAppContext();
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",

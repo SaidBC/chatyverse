@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import NoFriends from "./NoFriends";
 import useFetch from "../../../hooks/useFetch";
 import NotFoundError from "../../../components/NotFoundError";
 import Loading from "../../../components/Loading";
 import FriendBox from "../../../components/FriendBox";
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function FriendsList({ token, userId }) {
   const {
@@ -21,7 +22,7 @@ function FriendsList({ token, userId }) {
   }
   return (
     <ul className="flex flex-col gap-2  w-full max-h-72 overflow-y-auto">
-      {friends && friends.length ? (
+      {token && userId && friends.length ? (
         friends.map((friend) => {
           return (
             <FriendBox
@@ -42,5 +43,10 @@ function FriendsList({ token, userId }) {
     </ul>
   );
 }
+
+FriendsList.propTypes = {
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 
 export default FriendsList;

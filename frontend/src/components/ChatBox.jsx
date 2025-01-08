@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import FormattedTimeAgo from "./FormattedTimeAgo";
 import AvatarImage from "./AvatarImage";
@@ -55,5 +56,17 @@ function ChatBox({
     </li>
   );
 }
+
+ChatBox.propTypes = {
+  online: PropTypes.bool,
+  username: PropTypes.string.isRequired,
+  profilePicture: PropTypes.string.isRequired,
+  isActive: PropTypes.bool,
+  to: PropTypes.string.isRequired,
+  lastMessage: PropTypes.shape({
+    createdAt: PropTypes.string,
+    content: PropTypes.string,
+  }),
+};
 
 export default ChatBox;

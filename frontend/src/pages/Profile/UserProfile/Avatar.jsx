@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import AvatarImage from "../../../components/AvatarImage";
 
 function Avatar({ username, profilePicture }) {
@@ -11,5 +12,10 @@ function Avatar({ username, profilePicture }) {
     </div>
   );
 }
+
+Avatar.propTypes = {
+  username: PropTypes.string.isRequired,
+  profilePicture: PropTypes.string.isRequired,
+};
 
 export default Avatar;

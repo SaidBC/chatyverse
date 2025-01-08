@@ -33,7 +33,7 @@ const sendFriendRequest = asyncHandler(async function (req, res) {
   });
   if (isAlreadyReceivedRequest)
     throw new BadRequestError("Your Friend already sent you request");
-  const request = await prisma.friendRequest.upsert({
+  await prisma.friendRequest.upsert({
     where: { id: isAlreadyRequest?.id || "A random unique" },
     update: { ...data, status: "REQUETED" },
     create: data,

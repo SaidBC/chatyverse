@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import ShowFriendsBtn from "./ShowFriendsBtn";
 import LogoutBtn from "./LogoutBtn";
 
@@ -9,5 +10,9 @@ function FriendsAndLogout({ onShowModel }) {
     </div>
   );
 }
+
+FriendsAndLogout.propTypes = {
+  onShowModel: PropTypes.func.isRequired,
+};
 
 export default FriendsAndLogout;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import NotFoundImage from "../assets/images/rb_5529.png";
 function NotFoundError({ message }) {
   return (
@@ -9,5 +10,9 @@ function NotFoundError({ message }) {
     </div>
   );
 }
+
+NotFoundError.propTypes = {
+  message: PropTypes.string,
+};
 
 export default NotFoundError;

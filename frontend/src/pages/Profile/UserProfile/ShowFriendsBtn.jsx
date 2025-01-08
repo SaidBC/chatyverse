@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import IconicButton from "../../../components/Buttons/IconicButton";
 
 function ShowFriendsBtn({ onShowModel }) {
@@ -12,4 +13,9 @@ function ShowFriendsBtn({ onShowModel }) {
     </IconicButton>
   );
 }
+
+ShowFriendsBtn.propTypes = {
+  onShowModel: PropTypes.func.isRequired,
+};
+
 export default ShowFriendsBtn;

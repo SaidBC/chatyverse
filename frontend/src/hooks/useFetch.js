@@ -24,6 +24,7 @@ function useFetch(url, opts = {}, deps = []) {
       setError(false);
       setLoading(true);
     };
+    // eslint-disable-next-line
   }, [url, ...deps]);
 
   return { loading, data, error, setLoading, setData, setError };

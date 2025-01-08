@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AppContext } from "./App";
 import useAppContext from "./hooks/useAppContext";
-const SERVER_URL = "http://localhost:8000/api/v1";
+import PropTypes from "prop-types";
+
 function IsAuth({ path, children }) {
   const { user } = useAppContext();
   if (path.startsWith("/auth") && user) return <Navigate to="/profile" />;
@@ -15,5 +14,10 @@ function IsAuth({ path, children }) {
   if (user && path == "*") return <Navigate to="/profile" />;
   return children;
 }
+
+IsAuth.propTypes = {
+  path: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default IsAuth;

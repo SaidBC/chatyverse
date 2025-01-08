@@ -6,7 +6,7 @@ import useAppContext from "../../../hooks/useAppContext";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 function Login() {
   const navigate = useNavigate();
   const { setToken } = useAppContext();

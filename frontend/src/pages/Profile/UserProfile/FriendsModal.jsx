@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import useAppContext from "../../../hooks/useAppContext";
 import IconButton from "../../../components/Buttons/IconButton";
@@ -13,7 +14,7 @@ function FriendsModal({ onCloseModal, isModelOpen, userId }) {
     return () => {
       window.removeEventListener("keydown", onCloseWithKey);
     };
-  }, []);
+  }, [onCloseModal]);
   return (
     <>
       {isModelOpen && <div className="fixed inset-0 bg-gray-950/80"></div>}
@@ -35,4 +36,11 @@ function FriendsModal({ onCloseModal, isModelOpen, userId }) {
     </>
   );
 }
+
+FriendsModal.propTypes = {
+  onCloseModal: PropTypes.func.isRequired,
+  isModelOpen: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired,
+};
+
 export default FriendsModal;

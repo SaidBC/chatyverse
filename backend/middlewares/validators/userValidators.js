@@ -17,19 +17,17 @@ const addUserValidator = [
     .notEmpty()
     .withMessage("Username must not be empty")
     .custom(async function (val) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const user = await prisma.user.findUnique({
-            where: { username: val },
-          });
-          if (user) return reject("Username already exists");
-          resolve();
-        } catch (error) {
-          if (error instanceof Prisma.PrismaClientValidationError)
-            return resolve();
-          return reject("Something wrong");
-        }
-      });
+      const where = { username: val };
+      return prisma.user
+        .findUnique({ where })
+        .then((user) => {
+          if (user) throw Error("Username already exists");
+          return true;
+        })
+        .catch((err) => {
+          if (err instanceof Prisma.PrismaClientValidationError) return true;
+          throw Error(err.message);
+        });
     }),
   body("email")
     .isString()
@@ -39,19 +37,17 @@ const addUserValidator = [
     .isEmail()
     .withMessage("Invalid email try again")
     .custom(async function (val) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const user = await prisma.user.findUnique({
-            where: { email: val },
-          });
-          if (user) return reject("Email already exists");
-          resolve();
-        } catch (error) {
-          if (error instanceof Prisma.PrismaClientValidationError)
-            return resolve();
-          return reject("Something wrong");
-        }
-      });
+      const where = { email: val };
+      return prisma.user
+        .findUnique({ where })
+        .then((user) => {
+          if (user) throw Error("Email already exists");
+          return true;
+        })
+        .catch((err) => {
+          if (err instanceof Prisma.PrismaClientValidationError) return true;
+          throw Error(err.message);
+        });
     }),
   body("password")
     .isLength({ min: 4 })
@@ -68,19 +64,17 @@ const updateUserValidator = [
     .notEmpty()
     .withMessage("Username must not be empty")
     .custom(async function (val) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const user = await prisma.user.findUnique({
-            where: { username: val },
-          });
-          if (user) return reject("Username already exists");
-          resolve();
-        } catch (error) {
-          if (error instanceof Prisma.PrismaClientValidationError)
-            return resolve();
-          return reject(error.message);
-        }
-      });
+      const where = { username: val };
+      return prisma.user
+        .findUnique({ where })
+        .then((user) => {
+          if (user) throw Error("Username already exists");
+          return true;
+        })
+        .catch((err) => {
+          if (err instanceof Prisma.PrismaClientValidationError) return true;
+          throw Error(err.message);
+        });
     }),
   body("email")
     .optional()
@@ -99,35 +93,33 @@ const updateUserValidator = [
     .isEmail()
     .withMessage("Invalid email try again")
     .custom(async function (val) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const user = await prisma.user.findUnique({
-            where: { email: val },
-          });
-          if (user) return reject("Email already exists");
-          resolve();
-        } catch (error) {
-          if (error instanceof Prisma.PrismaClientValidationError)
-            return resolve();
-          return reject(error.message);
-        }
-      });
+      const where = { email: val };
+      return prisma.user
+        .findUnique({ where })
+        .then((user) => {
+          if (user) throw Error("Email already exists");
+          return true;
+        })
+        .catch((err) => {
+          if (err instanceof Prisma.PrismaClientValidationError) return true;
+          throw Error(err.message);
+        });
     }),
 
   body("password")
     .optional()
     .isLength({ min: 4 })
     .withMessage("password must be at least 4 characters")
-    .custom((val, { req }) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const match = await bcrypt.compare(val, req.user.password);
-          if (!match) return reject("Incorrect password try again");
-          resolve();
-        } catch (error) {
-          return reject(error.message);
-        }
-      });
+    .custom(async (val, { req }) => {
+      return bcrypt
+        .compare(val, req.user.password)
+        .then((match) => {
+          if (!match) throw Error("Incorrect password try again");
+          return true;
+        })
+        .catch((err) => {
+          throw Error(err.message);
+        });
     }),
   body("new-password")
     .optional()
@@ -180,12 +172,16 @@ const loginValidator = [
   body("password")
     .isLength({ min: 4 })
     .withMessage("password must be at least 4 characters")
-    .custom(function (val, { req }) {
-      return new Promise(async (resolve, reject) => {
-        const match = await bcrypt.compare(val, req.user.password);
-        if (!match) return reject("Incorrect password");
-        return resolve();
-      });
+    .custom(async function (val, { req }) {
+      return bcrypt
+        .compare(val, req.user.password)
+        .then((match) => {
+          if (!match) throw Error("Incorrect password try again");
+          return true;
+        })
+        .catch((err) => {
+          throw Error(err.message);
+        });
     }),
   checkExact(),
 ];

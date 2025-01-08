@@ -1,11 +1,12 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useRef, useState } from "react";
 import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import AvatarImage from "../../../../components/AvatarImage";
 
-const SERVER_URL = "http://localhost:8000/api/v1";
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function AvatarForm({ profilePicture, userId, token }) {
   const [showAlert, setShowAlert] = useState({
@@ -118,5 +119,11 @@ function AvatarForm({ profilePicture, userId, token }) {
     </>
   );
 }
+
+AvatarForm.propTypes = {
+  profilePicture: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+};
 
 export default AvatarForm;

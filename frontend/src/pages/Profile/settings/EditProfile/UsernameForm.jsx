@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import FormInput from "../../../../components/Inputs/FormInput";
 import Button from "../../../../components/Buttons/Button";
@@ -34,5 +35,10 @@ function UsernameForm({ username: initialUsername, handleSave }) {
     </form>
   );
 }
+
+UsernameForm.propTypes = {
+  username: PropTypes.string.isRequired,
+  handleSave: PropTypes.func.isRequired,
+};
 
 export default UsernameForm;

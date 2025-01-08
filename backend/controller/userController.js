@@ -27,6 +27,7 @@ const getAllUsers = asyncHandler(async function (req, res) {
 
 const getUser = asyncHandler(async function (req, res) {
   const { role } = req;
+  // eslint-disable-next-line
   const { email, password, ...other } = req.user;
   if (role === "ADMIN") return res.json({ success: true, data: req.user });
   res.json({ success: true, data: other });
@@ -82,7 +83,7 @@ const uploadUserPicture = asyncHandler(async (req, res) => {
   const b64 = Buffer.from(buffer).toString("base64");
   const dataUri = "data:" + mimetype + ";base64," + b64;
   const cldRes = await handleUpload(dataUri);
-  const user = await prisma.user.update({
+  await prisma.user.update({
     where: { id: Number(req.params.userId) },
     data: {
       profilePicture: cldRes.url,
@@ -93,7 +94,7 @@ const uploadUserPicture = asyncHandler(async (req, res) => {
 
 const connectUser = asyncHandler(async function (req, res) {
   const userId = Number(req.params.userId);
-  const user = await prisma.user.update({
+  await prisma.user.update({
     where: { id: userId },
     data: {
       online: true,
@@ -104,7 +105,7 @@ const connectUser = asyncHandler(async function (req, res) {
 
 const disconnectUser = asyncHandler(async function (req, res) {
   const userId = Number(req.params.userId);
-  const user = await prisma.user.update({
+  await prisma.user.update({
     where: { id: userId },
     data: {
       online: false,

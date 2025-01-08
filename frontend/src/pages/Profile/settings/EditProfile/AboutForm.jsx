@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
 import AlertPopup from "../../../../components/AlertPopup";
@@ -67,5 +68,11 @@ function AboutForm({
     </>
   );
 }
+
+AboutForm.propTypes = {
+  handleSave: PropTypes.func.isRequired,
+  birthday: PropTypes.string,
+  location: PropTypes.string,
+};
 
 export default AboutForm;

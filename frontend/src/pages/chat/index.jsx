@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import useAppContext from "../../hooks/useAppContext";
-import useConnnectUser from "../../hooks/useConnectUser";
 
 function Chat() {
   const location = useLocation();

@@ -1,11 +1,12 @@
-import ChatBox from "../../../components/ChatBox";
+import PropTypes from "prop-types";
 import FriendBox from "../../../components/FriendBox";
 
 function SearchResults({ results, token, userId }) {
   return (
     <ul className="flex flex-col gap-2  w-full max-h-72 overflow-y-auto">
-      {results &&
-        results.length &&
+      {results?.length &&
+        token &&
+        userId &&
         results.map((result) => {
           return (
             <FriendBox
@@ -23,5 +24,10 @@ function SearchResults({ results, token, userId }) {
     </ul>
   );
 }
+SearchResults.propTypes = {
+  results: PropTypes.array.isRequired,
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 
 export default SearchResults;

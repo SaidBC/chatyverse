@@ -1,7 +1,7 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import socket from "../../../socket";
 import ChatBox from "../../../components/ChatBox";
-import useAppContext from "../../../hooks/useAppContext";
 
 function LastMessagesList({ token, userId }) {
   const [messages, setMessages] = useState([]);
@@ -14,7 +14,7 @@ function LastMessagesList({ token, userId }) {
       { token, userId },
       handleReceiveMessages
     );
-  }, [socket]);
+  }, [token, userId]);
   return (
     <ul className="flex flex-col gap-2  w-full max-h-72 overflow-y-auto">
       {messages?.length ? (
@@ -40,5 +40,10 @@ function LastMessagesList({ token, userId }) {
     </ul>
   );
 }
+
+LastMessagesList.propTypes = {
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 
 export default LastMessagesList;

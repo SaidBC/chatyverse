@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import InternalServerErrorImage from "../assets/images/rb_5572.png";
 function InternalServerError({ message }) {
   return (
@@ -13,5 +14,9 @@ function InternalServerError({ message }) {
     </div>
   );
 }
+
+InternalServerError.propTypes = {
+  message: PropTypes.string,
+};
 
 export default InternalServerError;

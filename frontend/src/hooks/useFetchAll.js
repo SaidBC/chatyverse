@@ -4,6 +4,7 @@ function useFetchAll(reqs) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(new Map());
   const [error, setError] = useState(new Map());
+  const reqsString = JSON.stringify(reqs);
   useEffect(() => {
     const fetching = async () => {
       try {
@@ -29,7 +30,8 @@ function useFetchAll(reqs) {
       }
     };
     fetching();
-  }, [JSON.stringify(reqs)]);
+    // eslint-disable-next-line
+  }, [reqsString]);
   return { loading, data, error, setLoading, setData, setError };
 }
 
