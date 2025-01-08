@@ -6,8 +6,7 @@ import useFetchAll from "../../../hooks/useFetchAll";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function FriendAndMessage({ userId }) {
-  const token = useAppContext().user;
-  const { decodedUser } = useOutletContext();
+  const { token, user } = useAppContext();
   const opts = {
     method: "GET",
     headers: {
@@ -15,26 +14,16 @@ function FriendAndMessage({ userId }) {
     },
   };
   const friendRequestsURI =
-    SERVER_URL +
-    "/users/" +
-    decodedUser.current.id +
-    "/requests" +
-    "?senderId=" +
-    userId;
+    SERVER_URL + "/users/" + user.id + "/requests" + "?senderId=" + userId;
   const sentRequestsURI =
     SERVER_URL +
     "/users/" +
-    decodedUser.current.id +
+    user.id +
     "/requests/sent" +
     "?receiverId=" +
     userId;
   const myFriendsURI =
-    SERVER_URL +
-    "/users/" +
-    decodedUser.current.id +
-    "/friends" +
-    "?friendId=" +
-    userId;
+    SERVER_URL + "/users/" + user.id + "/friends" + "?friendId=" + userId;
   const { data, loading } = useFetchAll([
     [friendRequestsURI, opts],
     [sentRequestsURI, opts],

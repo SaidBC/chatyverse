@@ -23,6 +23,7 @@ model User {
   location           String?
   bio                String?
   profilePicture     String          @default("https://cdn-icons-png.flaticon.com/512/3135/3135768.png")
+  online             Boolean         @default(false)
   sentToFriends      FriendRequest[] @relation("sender")
   receivedFromFiends FriendRequest[] @relation("receiver")
   friends            User[]          @relation("friends")

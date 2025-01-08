@@ -3,9 +3,7 @@ import IconicButton from "../../../../components/Buttons/IconicButton";
 
 function DeclineBtn({ senderId, handleClick }) {
   const {
-    decodedUser: {
-      current: { id: receiverId },
-    },
+    user: { id: receiverId },
   } = useOutletContext();
   return (
     <IconicButton

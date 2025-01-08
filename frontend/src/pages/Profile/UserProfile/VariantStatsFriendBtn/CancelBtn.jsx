@@ -3,9 +3,7 @@ import IconicButton from "../../../../components/Buttons/IconicButton";
 
 function CancelBtn({ receiverId, handleClick }) {
   const {
-    decodedUser: {
-      current: { id: senderId },
-    },
+    user: { id: senderId },
   } = useOutletContext();
   return (
     <IconicButton

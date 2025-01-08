@@ -1,15 +1,14 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
 import saveHelper from "../../../utils/saveHelper";
-import useDecodeToken from "../../../hooks/useDecodeToken";
 import useAppContext from "../../../hooks/useAppContext";
 import AlertPopup from "../../../components/AlertPopup";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
 function ChangePassword() {
-  const { setUser, user: token } = useAppContext();
-  const userId = useDecodeToken(token).current.id;
+  const { setToken, user } = useAppContext();
+  const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
     errorMessage: false,
@@ -38,7 +37,7 @@ function ChangePassword() {
       confirmNewPassword,
       setConfirmNewPassword,
     };
-    saveHelper(form, userId, token, setUser, setShowAlert);
+    saveHelper(form, userId, token, setToken, setShowAlert);
   };
   return (
     <div className="bg-gray-900 w-full xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">

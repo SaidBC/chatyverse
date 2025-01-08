@@ -25,7 +25,9 @@ function Header() {
           <span className="font-bold text">{friend.username}</span>
         </div>
         <div>
-          <span className="text-xs">ONLINE</span>
+          <span className="text-xs">
+            {friend.online ? "ONLINE" : "OFFLINE"}
+          </span>
         </div>
       </div>
       <IconButton

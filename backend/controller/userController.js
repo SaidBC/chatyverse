@@ -19,6 +19,7 @@ const getAllUsers = asyncHandler(async function (req, res) {
     select.id = true;
     select.username = true;
     select.profilePicture = true;
+    select.online = true;
   }
   const users = await prisma.user.findMany({ where, select });
   res.json({ success: true, data: users });
@@ -90,6 +91,28 @@ const uploadUserPicture = asyncHandler(async (req, res) => {
   res.json({ success: true, data: "Profile image upload was done" });
 });
 
+const connectUser = asyncHandler(async function (req, res) {
+  const userId = Number(req.params.userId);
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      online: true,
+    },
+  });
+  res.json({ success: true, data: "User is now online" });
+});
+
+const disconnectUser = asyncHandler(async function (req, res) {
+  const userId = Number(req.params.userId);
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      online: false,
+    },
+  });
+  res.json({ success: true, data: "User is now offline" });
+});
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -98,4 +121,6 @@ module.exports = {
   getUser,
   userAllFriends,
   uploadUserPicture,
+  disconnectUser,
+  connectUser,
 };

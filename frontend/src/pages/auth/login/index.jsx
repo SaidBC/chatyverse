@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import checkErrors from "../../../utils/checkErrors";
 import validateForm from "../../../utils/validateForm";
-import ErrorText from "../../../components/ErrorText";
 import useAppContext from "../../../hooks/useAppContext";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
@@ -10,7 +9,7 @@ import FormInput from "../../../components/Inputs/FormInput";
 const SERVER_URL = "http://localhost:8000/api/v1";
 function Login() {
   const navigate = useNavigate();
-  const { setUser } = useAppContext();
+  const { setToken } = useAppContext();
   const [username, setUsername] = useState({ value: "", errorMessage: false });
   const [password, setPassword] = useState({ value: "", errorMessage: false });
   const loginHandle = async function (e) {
@@ -45,7 +44,7 @@ function Login() {
       return checkErrors(errors, form);
     }
     const token = (await res.json()).data;
-    setUser(token);
+    setToken(token);
     navigate("/profile");
   };
   return (

@@ -16,6 +16,7 @@ function SearchResults({ results, token, userId }) {
               token={token}
               userId={userId}
               profilePicture={result.profilePicture}
+              online={result.online}
             />
           );
         })}

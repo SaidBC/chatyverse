@@ -5,8 +5,8 @@ import FriendsList from "../../Profile/UserProfile/FriendsList";
 import LastMessagesList from "./LastMessages";
 import SearchResults from "./SearchResults";
 
-function ChatBoxes({ userId, isSearching, results }) {
-  const { user: token } = useAppContext();
+function ChatBoxes({ userId, isSearching, results, connection }) {
+  const { token } = useAppContext();
   return (
     <ul className="flex flex-col gap-2  w-full overflow-y-auto grow-1">
       {!isSearching && (
@@ -15,7 +15,11 @@ function ChatBoxes({ userId, isSearching, results }) {
             <h1 className="text-xl font-extrabold text-slate-200">
               Last Messages :
             </h1>
-            <LastMessagesList userId={userId} token={token} />
+            <LastMessagesList
+              userId={userId}
+              token={token}
+              connection={connection}
+            />
           </li>
           <li>
             <h1 className="text-xl font-extrabold text-slate-200">Friends :</h1>

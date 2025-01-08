@@ -9,14 +9,14 @@ import FriendAndMessage from "./FriendAndMessage";
 import NotFoundError from "../../../components/NotFoundError";
 import Loading from "../../../components/Loading";
 import InternalServerError from "../../../components/InternalServerError";
+import useAppContext from "../../../hooks/useAppContext";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function UserProfile() {
   const [search] = useSearchParams();
-  const { decodedUser } = useOutletContext();
-  const userId = Number(search.get("id")) || decodedUser.current.id;
-  const isMyProfile =
-    search.get("id") == decodedUser.current.id || !search.get("id");
+  const { user: User } = useAppContext();
+  const userId = Number(search.get("id")) || User.id;
+  const isMyProfile = search.get("id") == User.id || !search.get("id");
   const {
     data: { data: user },
     error,

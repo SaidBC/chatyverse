@@ -2,7 +2,6 @@ import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import BioForm from "./BioForm";
 import AboutForm from "./AboutForm";
 import AvatarForm from "./AvatarForm";
-import useDecodeToken from "../../../../hooks/useDecodeToken";
 import useFetch from "../../../../hooks/useFetch";
 import saveHelper from "../../../../utils/saveHelper";
 import useAppContext from "../../../../hooks/useAppContext";
@@ -14,8 +13,8 @@ import InternalServerError from "../../../../components/InternalServerError";
 const SERVER_URL = "http://localhost:8000/api/v1";
 
 function EditProfile() {
-  const { setUser, user: token } = useAppContext();
-  const userId = useDecodeToken(token).current.id;
+  const { setToken, user: User, token } = useAppContext();
+  const userId = User.id;
   const {
     data: { data: user },
     error,
@@ -34,7 +33,7 @@ function EditProfile() {
     const { setShowAlert, ...form } = data;
     return function (e) {
       e.preventDefault();
-      saveHelper(form, userId, token, setUser, setShowAlert);
+      saveHelper(form, userId, token, setToken, setShowAlert);
     };
   };
 

@@ -9,7 +9,7 @@ const SERVER_URL = "http://localhost:8000/api/v1";
 
 function Signup() {
   const navigate = useNavigate();
-  const { setUser } = useAppContext();
+  const { setToken } = useAppContext();
   const [email, setEmail] = useState({ value: "", errorMessage: false });
   const [username, setUsername] = useState({ value: "", errorMessage: false });
   const [confirmPassword, setConfirmPassword] = useState({
@@ -49,7 +49,7 @@ function Signup() {
       return checkErrors(errors, form);
     }
     const token = (await res.json()).data;
-    setUser(token);
+    setToken(token);
     navigate("/profile");
   };
 

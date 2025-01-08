@@ -32,6 +32,7 @@ function FriendsList({ token, userId }) {
               token={token}
               userId={userId}
               profilePicture={friend.profilePicture}
+              online={friend.online}
             />
           );
         })

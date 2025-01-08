@@ -4,7 +4,7 @@ import IconButton from "../../../components/Buttons/IconButton";
 import FriendsList from "./FriendsList";
 
 function FriendsModal({ onCloseModal, isModelOpen, userId }) {
-  const { user: token } = useAppContext();
+  const { token } = useAppContext();
   useEffect(() => {
     const onCloseWithKey = (e) => {
       if (e.key === "Escape") return onCloseModal();

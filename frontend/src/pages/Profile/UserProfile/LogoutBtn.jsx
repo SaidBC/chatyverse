@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import IconicButton from "../../../components/Buttons/IconicButton";
 
 function LogoutBtn() {
-  const { setUser } = useAppContext();
+  const { setToken } = useAppContext();
   const navigate = useNavigate();
   const logoutHandle = function () {
-    setUser(null);
+    setToken(null);
     navigate("/auth/login");
   };
   return (

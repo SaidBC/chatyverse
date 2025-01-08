@@ -6,6 +6,8 @@ const {
   updateUser,
   userAllFriends,
   uploadUserPicture,
+  connectUser,
+  disconnectUser,
 } = require("../controller/userController");
 const auth = require("../middlewares/auth");
 const errorHandler = require("../middlewares/errorHanldler");
@@ -47,6 +49,13 @@ userRouter.post(
 );
 
 userRouter.get("/users/:userId/friends", userAllFriends);
+userRouter.patch("/users/:userId/connect", isUserExists, auth, connectUser);
+userRouter.patch(
+  "/users/:userId/disconnect",
+  isUserExists,
+  auth,
+  disconnectUser
+);
 
 userRouter.use(errorHandler);
 

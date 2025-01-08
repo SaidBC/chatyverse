@@ -2,15 +2,14 @@ import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useRef, useState } from "react";
 import ErrorText from "../../../components/ErrorText";
 import saveHelper from "../../../utils/saveHelper";
-import useDecodeToken from "../../../hooks/useDecodeToken";
 import useAppContext from "../../../hooks/useAppContext";
 import AlertPopup from "../../../components/AlertPopup";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
 function ChangeEmail() {
-  const { setUser, user: token } = useAppContext();
-  const userId = useDecodeToken(token).current.id;
+  const { setToken, user } = useAppContext();
+  const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
     errorMessage: false,
@@ -39,7 +38,7 @@ function ChangeEmail() {
       newEmail,
       setNewEmail,
     };
-    saveHelper(form, userId, token, setUser, setShowAlert);
+    saveHelper(form, userId, token, setToken, setShowAlert);
   };
 
   return (

@@ -20,7 +20,7 @@ const saveHelper = async function (form, userId, token, setUser, setShowAlert) {
     },
   });
   if (res.status === 401) {
-    setUser(null);
+    setToken(null);
   }
   if (res.status === 400) {
     const { errors } = (await res.json()).error;

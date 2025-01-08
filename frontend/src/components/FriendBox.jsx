@@ -11,6 +11,7 @@ function FriendBox({
   token,
   profilePicture,
   friendId,
+  online,
 }) {
   if (!userId || !token || !friendId) return;
   const [lastMessage, setLastMessage] = useState({
@@ -25,6 +26,7 @@ function FriendBox({
     };
     socket.emit("last-message:receive", { token, userId, friendId }, cb);
     return () => {
+      socket.off("last-message:receive", cb);
       setLoading(true);
     };
   }, [socket]);
@@ -40,6 +42,7 @@ function FriendBox({
           username={username}
           isActive={isActive}
           to={to}
+          online={online}
         />
       ) : (
         <PulseBox />

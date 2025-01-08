@@ -1,16 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Nav from "./Nav";
-import useDecodeToken from "../../hooks/useDecodeToken";
 import useAppContext from "../../hooks/useAppContext";
 
 function Profile() {
-  const { user: token } = useAppContext();
-  const decodedUser = useDecodeToken(token);
+  const { token, user, isConnected } = useAppContext();
+  if (!isConnected) return <>Connecting ...</>;
   return (
     <div className="flex min-h-[100dvh]">
       <Nav />
       <main className="w-full flex justify-center items-start">
-        <Outlet context={{ decodedUser }} />
+        <Outlet context={{ user }} />
       </main>
     </div>
   );
