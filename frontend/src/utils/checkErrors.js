@@ -9,7 +9,7 @@ function checkErrors(errors, form) {
         (error.path === "confirm-new-password" && key === "confirmNewPassword")
       ) {
         form["set" + key[0].toUpperCase() + key.slice(1)]((prev) => {
-          if (prev.errorMessage === false) {
+          if (prev.errorMessage === "") {
             return { ...prev, errorMessage: error.msg };
           }
           return prev;

@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import ErrorText from "../Errors/ErrorText";
 import Input from "./Input";
+import { memo } from "react";
 
-function FormInput({ className, errorMessage, setInput, ...otherProps }) {
+const FormInput = memo(function FormInput({
+  className,
+  errorMessage,
+  setInput,
+  ...otherProps
+}) {
+  console.log(errorMessage);
   return (
     <Input
       onChange={(e) =>
@@ -17,7 +24,7 @@ function FormInput({ className, errorMessage, setInput, ...otherProps }) {
       {errorMessage && <ErrorText content={errorMessage} />}
     </Input>
   );
-}
+});
 
 FormInput.propTypes = {
   className: PropTypes.string,
