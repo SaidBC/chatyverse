@@ -43,7 +43,7 @@ function LastMessagesList({ token, userId }) {
 }
 
 LastMessagesList.propTypes = {
-  token: PropTypes.string.isRequired,
+  token: PropTypes.any,
   userId: PropTypes.number.isRequired,
 };
 

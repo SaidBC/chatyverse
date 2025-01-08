@@ -27,7 +27,7 @@ function SearchResults({ results, token, userId }) {
 }
 SearchResults.propTypes = {
   results: PropTypes.array.isRequired,
-  token: PropTypes.string.isRequired,
+  token: PropTypes.any,
   userId: PropTypes.number.isRequired,
 };
 

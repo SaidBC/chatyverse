@@ -46,7 +46,7 @@ function FriendsList({ token, userId }) {
 }
 
 FriendsList.propTypes = {
-  token: PropTypes.string.isRequired,
+  token: PropTypes.any,
   userId: PropTypes.number.isRequired,
 };
 

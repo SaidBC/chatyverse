@@ -9,7 +9,6 @@ const FormInput = memo(function FormInput({
   setInput,
   ...otherProps
 }) {
-  console.log(errorMessage);
   return (
     <Input
       onChange={(e) =>

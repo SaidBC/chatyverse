@@ -16,6 +16,7 @@ function App() {
     if (token) {
       setUser(decodeToken(token));
     }
+    if (!token && user) setUser(null);
   }, [token]);
   const value = useMemo(
     () => ({ token, setToken, user, setUser, isConnected }),

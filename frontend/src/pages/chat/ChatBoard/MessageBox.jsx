@@ -47,7 +47,7 @@ function MessageBox({ userId, friendId, token }) {
 MessageBox.propTypes = {
   userId: PropTypes.number.isRequired,
   friendId: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
+  token: PropTypes.any,
 };
 
 export default MessageBox;

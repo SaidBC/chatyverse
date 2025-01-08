@@ -53,7 +53,7 @@ function FriendBox({
 
 FriendBox.propTypes = {
   userId: PropTypes.number.isRequired,
-  token: PropTypes.string.isRequired,
+  token: PropTypes.any,
   friendId: PropTypes.number.isRequired,
   profilePicture: PropTypes.string.isRequired,
   lastMessage: PropTypes.shape({

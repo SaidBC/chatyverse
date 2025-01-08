@@ -48,7 +48,7 @@ function VariantStatsFriendBtn({ token, userId, type }) {
 
 VariantStatsFriendBtn.propTypes = {
   type: PropTypes.oneOf(["none", "friend", "sent", "request"]).isRequired,
-  token: PropTypes.string.isRequired,
+  token: PropTypes.any,
   userId: PropTypes.number.isRequired,
 };
 export default VariantStatsFriendBtn;
