@@ -7,7 +7,7 @@
     "reset:db": "dropdb chatyverse && prisma db push",
     "seed": "node prisma/seed.js",
     "lint": "eslint .",
-    "build": "node ."
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
