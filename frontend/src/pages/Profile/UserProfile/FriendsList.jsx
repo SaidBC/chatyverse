@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import NoFriends from "./NoFriends";
 import useFetch from "../../../hooks/useFetch";
-import NotFoundError from "../../../components/NotFoundError";
+import NotFoundError from "../../../components/Errors/NotFoundError";
 import Loading from "../../../components/Loading";
-import FriendBox from "../../../components/FriendBox";
+import FriendBox from "../../../components/Boxes/FriendBox";
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function FriendsList({ token, userId }) {

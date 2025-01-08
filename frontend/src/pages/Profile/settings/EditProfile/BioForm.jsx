@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
-import ErrorText from "../../../../components/ErrorText";
+import ErrorText from "../../../../components/Errors/ErrorText";
 import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
 

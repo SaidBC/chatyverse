@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import FriendBox from "../../../components/FriendBox";
+import FriendBox from "../../../components/Boxes/FriendBox";
 
 function SearchResults({ results, token, userId }) {
   return (

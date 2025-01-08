@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import ErrorText from "../ErrorText";
+import ErrorText from "../Errors/ErrorText";
 import Input from "./Input";
 
 function FormInput({ className, errorMessage, setInput, ...otherProps }) {

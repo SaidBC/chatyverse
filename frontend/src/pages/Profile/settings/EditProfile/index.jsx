@@ -5,10 +5,10 @@ import AvatarForm from "./AvatarForm";
 import useFetch from "../../../../hooks/useFetch";
 import saveHelper from "../../../../utils/saveHelper";
 import useAppContext from "../../../../hooks/useAppContext";
-import NotFoundError from "../../../../components/NotFoundError";
+import NotFoundError from "../../../../components/Errors/NotFoundError";
 import Loading from "../../../../components/Loading";
 import UsernameForm from "./UsernameForm";
-import InternalServerError from "../../../../components/InternalServerError";
+import InternalServerError from "../../../../components/Errors/InternalServerError";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 

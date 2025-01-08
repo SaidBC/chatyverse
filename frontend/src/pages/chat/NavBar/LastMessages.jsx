@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import socket from "../../../socket";
-import ChatBox from "../../../components/ChatBox";
+import ChatBox from "../../../components/Boxes/ChatBox";
 
 function LastMessagesList({ token, userId }) {
   const [messages, setMessages] = useState([]);
