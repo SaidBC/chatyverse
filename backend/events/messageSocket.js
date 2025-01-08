@@ -1,4 +1,3 @@
-const { last } = require("lodash");
 const isAuthSocket = require("../middlewares/isAuthSocket");
 const {
   sendMessageValidatorSocket,
@@ -92,7 +91,8 @@ const onReceiveLastMessages = function (io, socket) {
   return async ({ token, userId }, cb) => {
     const isAuth = isAuthSocket({ socket, userId, token });
     if (!isAuth) return;
-    const userChats = await prisma.message.findMany({
+
+    const lastMessages = await prisma.message.findMany({
       where: {
         OR: [
           {
@@ -103,51 +103,54 @@ const onReceiveLastMessages = function (io, socket) {
           },
         ],
       },
-      orderBy: { createdAt: "desc" },
       distinct: ["authorId", "receiverId"],
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
-    const lastMessages = [];
-    for (const chat of userChats) {
-      const { authorId, receiverId } = chat;
-      const friendId = authorId === userId ? receiverId : authorId;
-      const friend = await prisma.user.findUnique({
-        where: {
-          id: friendId,
-        },
-        select: {
-          username: true,
-          profilePicture: true,
-          online: true,
-        },
-      });
-      const lastMessage = await prisma.message.findFirst({
-        where: {
-          OR: [
-            {
-              authorId: Number(userId),
-              receiverId: Number(friendId),
-            },
-            {
-              authorId: Number(friendId),
-              receiverId: Number(userId),
-            },
-          ],
-        },
-        orderBy: { createdAt: "desc" },
-      });
-      if (lastMessage) {
-        lastMessages.push({
-          authorId: friendId,
-          authorUsername: friend.username,
-          authorProfilePicture: friend.profilePicture,
-          content: lastMessage.content,
-          createdAt: lastMessage.createdAt,
-          authorOnline: friend.online,
+    const chatIds = new Set();
+    const lastMessageWithUserPromises = lastMessages.map(async (message) => {
+      const chatId = `${Math.min(
+        message.authorId,
+        message.receiverId
+      )}/${Math.max(message.authorId, message.receiverId)}`;
+
+      if (!chatIds.has(chatId)) {
+        chatIds.add(chatId);
+        const friendId =
+          message.authorId === Number(userId)
+            ? message.receiverId
+            : message.authorId;
+
+        const friend = await prisma.user.findUnique({
+          where: {
+            id: friendId,
+          },
+          select: {
+            id: true,
+            username: true,
+            online: true,
+            profilePicture: true,
+          },
         });
+
+        return {
+          createdAt: message.createdAt,
+          content: message.content,
+          authorId: friend.id,
+          authorUsername: friend.username,
+          authorOnline: friend.online,
+          authorProfilePicture: friend.profilePicture,
+        };
       }
-    }
-    cb(lastMessages);
+    });
+
+    const lastMessageWithUser = (
+      await Promise.all(lastMessageWithUserPromises)
+    ).filter(Boolean);
+
+    cb(lastMessageWithUser);
   };
 };
 
