@@ -5,7 +5,7 @@ import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import ChatBoxes from "./ChatBoxes";
 import { useState } from "react";
 
-function NavBar({ userId, connection }) {
+function NavBar({ userId }) {
   const [search, setSearch] = useState({ isSearching: false, results: [] });
   return (
     <nav className="fixed md:static md:w-auto md:h-[100dvh] flex h-full items-center flex-col bg-gray-900 px-6 pt-8 gap-8 w-full">
@@ -17,7 +17,6 @@ function NavBar({ userId, connection }) {
         userId={userId}
         isSearching={search.isSearching}
         results={search.results}
-        connection={connection}
       />
       <div className="w-full mt-auto mb-8">
         <Link
@@ -33,8 +32,7 @@ function NavBar({ userId, connection }) {
 }
 
 NavBar.propTypes = {
-  userId: PropTypes.string.isRequired,
-  connection: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default NavBar;

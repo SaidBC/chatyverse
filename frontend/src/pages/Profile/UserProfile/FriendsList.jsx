@@ -34,6 +34,7 @@ function FriendsList({ token, userId }) {
               userId={userId}
               profilePicture={friend.profilePicture}
               online={friend.online}
+              isActive={false}
             />
           );
         })
@@ -46,7 +47,7 @@ function FriendsList({ token, userId }) {
 
 FriendsList.propTypes = {
   token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default FriendsList;

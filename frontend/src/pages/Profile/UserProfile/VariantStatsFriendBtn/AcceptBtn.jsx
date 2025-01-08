@@ -19,7 +19,7 @@ function AcceptBtn({ senderId, handleClick }) {
 }
 
 AcceptBtn.propTypes = {
-  senderId: PropTypes.string.isRequired,
+  senderId: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

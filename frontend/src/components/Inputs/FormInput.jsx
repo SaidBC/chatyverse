@@ -7,7 +7,7 @@ function FormInput({ className, errorMessage, setInput, ...otherProps }) {
     <Input
       onChange={(e) =>
         setInput(() => ({
-          errorMessage: false,
+          errorMessage: "",
           value: e.target.value,
         }))
       }

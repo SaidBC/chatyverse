@@ -122,7 +122,7 @@ function AvatarForm({ profilePicture, userId, token }) {
 
 AvatarForm.propTypes = {
   profilePicture: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
 };
 

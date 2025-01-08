@@ -10,13 +10,13 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 function Signup() {
   const navigate = useNavigate();
   const { setToken } = useAppContext();
-  const [email, setEmail] = useState({ value: "", errorMessage: false });
-  const [username, setUsername] = useState({ value: "", errorMessage: false });
+  const [email, setEmail] = useState({ value: "", errorMessage: "" });
+  const [username, setUsername] = useState({ value: "", errorMessage: "" });
   const [confirmPassword, setConfirmPassword] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
-  const [password, setPassword] = useState({ value: "", errorMessage: false });
+  const [password, setPassword] = useState({ value: "", errorMessage: "" });
 
   const signupHandle = async function (e) {
     e.preventDefault();

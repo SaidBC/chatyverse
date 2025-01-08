@@ -10,8 +10,8 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 function Login() {
   const navigate = useNavigate();
   const { setToken } = useAppContext();
-  const [username, setUsername] = useState({ value: "", errorMessage: false });
-  const [password, setPassword] = useState({ value: "", errorMessage: false });
+  const [username, setUsername] = useState({ value: "", errorMessage: "" });
+  const [password, setPassword] = useState({ value: "", errorMessage: "" });
   const loginHandle = async function (e) {
     e.preventDefault();
     const form = {

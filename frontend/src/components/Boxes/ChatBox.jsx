@@ -12,7 +12,7 @@ function ChatBox({
   lastMessage = "",
 }) {
   return (
-    <li className={isActive && "bg-indigo-700 rounded-lg"}>
+    <li className={isActive ? "bg-indigo-700 rounded-lg" : ""}>
       <Link
         to={to}
         className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/10"

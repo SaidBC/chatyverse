@@ -11,15 +11,15 @@ function ChangeEmail() {
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [email, setEmail] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [newEmail, setNewEmail] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [showAlert, setShowAlert] = useState({
     isPopped: false,
@@ -55,6 +55,7 @@ function ChangeEmail() {
             setInput={setEmail}
             placeholder="Enter your email"
             errorMessage={email.errorMessage}
+            value={email.value}
           />
           <FormInput
             type="password"
@@ -63,6 +64,7 @@ function ChangeEmail() {
             setInput={setPassword}
             placeholder="Enter your password"
             errorMessage={password.errorMessage}
+            value={password.value}
           />
           <FormInput
             type="email"
@@ -71,6 +73,7 @@ function ChangeEmail() {
             setInput={setNewEmail}
             placeholder="Enter your new email"
             errorMessage={newEmail.errorMessage}
+            value={newEmail.value}
           />
           <Button onClick={handleSave}>SAVE</Button>
         </form>

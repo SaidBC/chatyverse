@@ -8,7 +8,7 @@ import Button from "../../../../components/Buttons/Button";
 function BioForm({ handleSave, bio: bioInitial }) {
   const [bio, setBio] = useState({
     value: bioInitial || "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [showAlert, setShowAlert] = useState({
     isPopped: false,
@@ -34,7 +34,7 @@ function BioForm({ handleSave, bio: bioInitial }) {
             value={bio.value}
             placeholder="Enter your new bio"
             onChange={(e) =>
-              setBio(() => ({ errorMessage: false, value: e.target.value }))
+              setBio(() => ({ errorMessage: "", value: e.target.value }))
             }
           ></textarea>
           {bio.errorMessage && <ErrorText content={bio.errorMessage} />}
@@ -52,7 +52,7 @@ function BioForm({ handleSave, bio: bioInitial }) {
 
 BioForm.propTypes = {
   handleSave: PropTypes.func.isRequired,
-  bio: PropTypes.string.isRequired,
+  bio: PropTypes.string,
 };
 
 export default BioForm;

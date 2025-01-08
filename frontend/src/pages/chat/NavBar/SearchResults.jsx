@@ -18,6 +18,7 @@ function SearchResults({ results, token, userId }) {
               userId={userId}
               profilePicture={result.profilePicture}
               online={result.online}
+              isActive={false}
             />
           );
         })}
@@ -27,7 +28,7 @@ function SearchResults({ results, token, userId }) {
 SearchResults.propTypes = {
   results: PropTypes.array.isRequired,
   token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default SearchResults;

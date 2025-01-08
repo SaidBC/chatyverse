@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import FriendsAndLogout from "./FriendsAndLogout";
 import FriendsModal from "./FriendsModal";
 
-const FooterBtns = function ({ friends, userId }) {
+function FooterBtns({ friends, userId }) {
   const [isModelOpen, setIsModelOpen] = useState(false);
   const onCloseModel = useCallback(function () {
     setIsModelOpen(false);
@@ -22,11 +22,11 @@ const FooterBtns = function ({ friends, userId }) {
       />
     </>
   );
-};
+}
 
 FooterBtns.propTypes = {
-  friends: PropTypes.array.isRequired,
-  userId: PropTypes.string.isRequired,
+  friends: PropTypes.array,
+  userId: PropTypes.number.isRequired,
 };
 
 export default FooterBtns;

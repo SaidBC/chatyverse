@@ -40,7 +40,7 @@ function FriendsModal({ onCloseModal, isModelOpen, userId }) {
 FriendsModal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
   isModelOpen: PropTypes.bool.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default FriendsModal;

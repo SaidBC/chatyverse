@@ -17,7 +17,7 @@ function IsAuth({ path, children }) {
 
 IsAuth.propTypes = {
   path: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default IsAuth;

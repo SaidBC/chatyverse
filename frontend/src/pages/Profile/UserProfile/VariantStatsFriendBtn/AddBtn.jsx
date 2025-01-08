@@ -15,7 +15,7 @@ function AddBtn({ receiverId, handleClick }) {
 }
 
 AddBtn.propTypes = {
-  receiverId: PropTypes.string.isRequired,
+  receiverId: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

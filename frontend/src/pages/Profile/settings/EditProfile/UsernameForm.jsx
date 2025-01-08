@@ -13,7 +13,7 @@ function UsernameForm({ username: initialUsername, handleSave }) {
   });
   const [username, setUsername] = useState({
     value: initialUsername || "",
-    errorMessage: false,
+    errorMessage: "",
   });
   return (
     <form className="flex flex-col gap-4" action="" method="post">

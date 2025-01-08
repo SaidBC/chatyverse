@@ -11,15 +11,15 @@ function ChangePassword() {
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [newPassword, setNewPassword] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [confirmNewPassword, setConfirmNewPassword] = useState({
     value: "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [showAlert, setShowAlert] = useState({
     isPopped: false,
@@ -54,6 +54,7 @@ function ChangePassword() {
             placeholder="Enter your password"
             errorMessage={password.errorMessage}
             type="password"
+            value={password.value}
           />
           <FormInput
             label="New Password :"
@@ -62,6 +63,7 @@ function ChangePassword() {
             placeholder="Enter your new password"
             errorMessage={newPassword.errorMessage}
             type="password"
+            value={newPassword.value}
           />
           <FormInput
             label="Confirm Password :"
@@ -70,6 +72,7 @@ function ChangePassword() {
             placeholder="Confirm your new password"
             errorMessage={confirmNewPassword.errorMessage}
             type="password"
+            value={confirmNewPassword.value}
           />
           <Button onClick={handleSave}>SAVE</Button>
         </form>

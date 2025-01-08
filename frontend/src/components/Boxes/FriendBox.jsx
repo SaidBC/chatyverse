@@ -52,14 +52,14 @@ function FriendBox({
 }
 
 FriendBox.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
-  friendId: PropTypes.string.isRequired,
+  friendId: PropTypes.number.isRequired,
   profilePicture: PropTypes.string.isRequired,
   lastMessage: PropTypes.shape({
     content: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   username: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   to: PropTypes.string.isRequired,

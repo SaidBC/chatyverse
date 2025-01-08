@@ -4,7 +4,7 @@ import FriendsList from "../../Profile/UserProfile/FriendsList";
 import LastMessagesList from "./LastMessages";
 import SearchResults from "./SearchResults";
 
-function ChatBoxes({ userId, isSearching, results, connection }) {
+function ChatBoxes({ userId, isSearching, results }) {
   const { token } = useAppContext();
   return (
     <ul className="flex flex-col gap-2  w-full overflow-y-auto grow-1">
@@ -14,11 +14,7 @@ function ChatBoxes({ userId, isSearching, results, connection }) {
             <h1 className="text-xl font-extrabold text-slate-200">
               Last Messages :
             </h1>
-            <LastMessagesList
-              userId={userId}
-              token={token}
-              connection={connection}
-            />
+            <LastMessagesList userId={userId} token={token} />
           </li>
           <li>
             <h1 className="text-xl font-extrabold text-slate-200">Friends :</h1>
@@ -37,10 +33,9 @@ function ChatBoxes({ userId, isSearching, results, connection }) {
 }
 
 ChatBoxes.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
   isSearching: PropTypes.bool.isRequired,
   results: PropTypes.array.isRequired,
-  connection: PropTypes.object.isRequired,
 };
 
 export default ChatBoxes;

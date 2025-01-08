@@ -12,11 +12,11 @@ function AboutForm({
 }) {
   const [birthday, setBirthday] = useState({
     value: birthdayInitial?.slice(0, 10) || "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [location, setLocation] = useState({
     value: locationInitial || "",
-    errorMessage: false,
+    errorMessage: "",
   });
   const [showAlert, setShowAlert] = useState({
     isPopped: false,

@@ -19,7 +19,7 @@ function DeclineBtn({ senderId, handleClick }) {
 }
 
 DeclineBtn.propTypes = {
-  senderId: PropTypes.string.isRequired,
+  senderId: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

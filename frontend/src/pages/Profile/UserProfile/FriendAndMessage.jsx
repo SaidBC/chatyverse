@@ -50,7 +50,7 @@ function FriendAndMessage({ userId }) {
 }
 
 FriendAndMessage.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default FriendAndMessage;

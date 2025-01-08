@@ -19,7 +19,7 @@ function CancelBtn({ receiverId, handleClick }) {
 }
 
 CancelBtn.propTypes = {
-  receiverId: PropTypes.string.isRequired,
+  receiverId: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

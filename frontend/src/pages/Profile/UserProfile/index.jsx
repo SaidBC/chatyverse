@@ -15,7 +15,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 function UserProfile() {
   const [search] = useSearchParams();
   const { user: User } = useAppContext();
-  const userId = Number(search.get("id")) || User.id;
+  const userId = Number(search.get("id")) || Number(User.id);
   const isMyProfile = search.get("id") == User.id || !search.get("id");
   const {
     data: { data: user },

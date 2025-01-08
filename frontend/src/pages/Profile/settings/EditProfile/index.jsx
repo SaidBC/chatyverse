@@ -14,7 +14,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function EditProfile() {
   const { setToken, user: User, token } = useAppContext();
-  const userId = User.id;
+  const userId = Number(User.id);
   const {
     data: { data: user },
     error,

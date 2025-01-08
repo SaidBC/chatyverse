@@ -30,6 +30,7 @@ function LastMessagesList({ token, userId }) {
               }}
               profilePicture={message.authorProfilePicture}
               online={message.authorOnline}
+              isActive={false}
             />
           );
         })
@@ -43,7 +44,7 @@ function LastMessagesList({ token, userId }) {
 
 LastMessagesList.propTypes = {
   token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default LastMessagesList;
