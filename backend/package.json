@@ -6,7 +6,8 @@
     "dev": "nodemon app.js",
     "reset:db": "dropdb chatyverse && prisma db push",
     "seed": "node prisma/seed.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "node ."
   },
   "keywords": [],
   "author": "",
