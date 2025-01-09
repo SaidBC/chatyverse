@@ -5,6 +5,7 @@ import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
 import axios from "axios";
 import AvatarImage from "../../../../components/AvatarImage";
+import Progress from "../../../../components/Progress";
 
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
@@ -15,6 +16,8 @@ function AvatarForm({ profilePicture, userId, token }) {
     content: "",
     variant: "",
   });
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [showProgress, setShowProgress] = useState(false);
   const [file, setFile] = useState(null);
   const handleUpload = function (e) {
     e.preventDefault();
@@ -35,14 +38,23 @@ function AvatarForm({ profilePicture, userId, token }) {
     }
     const data = new FormData();
     data.set("avatar", file);
+    setShowProgress(true);
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      onUploadProgress: (progressEvent) => {
+        const uploadedPercentage =
+          (progressEvent.loaded / progressEvent.total) * 100;
+        console.log(uploadedPercentage);
+        setUploadProgress(uploadedPercentage.toFixed(2));
+      },
+    };
 
     axios
-      .post(SERVER_API_URL + "/users/" + userId + "/upload", data, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
+      .post(SERVER_API_URL + "/users/" + userId + "/upload", data, config)
       .then((res) => {
+        setShowProgress(false);
         if (res.status !== 200)
           return setShowAlert({
             isPopped: true,
@@ -59,7 +71,7 @@ function AvatarForm({ profilePicture, userId, token }) {
           });
         setShowAlert({
           isPopped: true,
-          title: "Failed",
+          title: "Success",
           variant: "success",
           content: res.data.data,
         });
@@ -116,6 +128,7 @@ function AvatarForm({ profilePicture, userId, token }) {
       {showAlert.isPopped && (
         <AlertPopup alert={showAlert} setShowAlert={setShowAlert} />
       )}
+      {showProgress && <Progress precentage={uploadProgress} />}
     </>
   );
 }
