@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const userRouter = require("./routes/userRouter");
 const app = express();
-const server = require("http").createServer(app);
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 
@@ -29,8 +30,9 @@ app.all("*", (_, res) => {
   });
 });
 
-socketInit(server);
+socketInit(io);
 
-server.listen(8000, () => {
-  console.log("the application is running at port ", PORT);
+http.listen(PORT, () => {
+  console.log(`App listening on PORT ${PORT}`);
+  // [!code ++]
 });

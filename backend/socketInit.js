@@ -8,8 +8,7 @@ const {
 const isAuthSocket = require("./middlewares/isAuthSocket");
 const prisma = require("./utils/prisma");
 
-const socketInit = function (server) {
-  const io = new Server(server, { cors: { origin: "*" } });
+const socketInit = function (io) {
   io.on("connection", (socket) => {
     console.log("A User Connected");
     socket.on("app:connect", async (userId, token) => {
