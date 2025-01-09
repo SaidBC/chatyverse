@@ -3,7 +3,9 @@ const express = require("express");
 const userRouter = require("./routes/userRouter");
 const app = express();
 const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const io = require("socket.io")(http, {
+  cors: { origin: "*" },
+});
 const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 
@@ -33,6 +35,5 @@ app.all("*", (_, res) => {
 socketInit(io);
 
 http.listen(PORT, () => {
-  console.log(`App listening on PORT ${PORT}`);
-  // [!code ++]
+  console.log("App listening on PORT ", PORT);
 });

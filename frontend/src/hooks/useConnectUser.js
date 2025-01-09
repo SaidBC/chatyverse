@@ -4,7 +4,6 @@ import socket from "../socket";
 function useConnnectUser({ token, userId }) {
   const [isConnected, setIsConnected] = useState(false);
   useEffect(() => {
-    console.log(import.meta.env);
     if (token && userId && !socket.connected) {
       socket.connect();
       socket.emit("app:connect", userId, token);
