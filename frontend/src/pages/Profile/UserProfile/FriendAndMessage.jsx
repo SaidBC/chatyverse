@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useAppContext from "../../../hooks/useAppContext";
 import VariantStatsFriendBtn from "./VariantStatsFriendBtn";
 import useFetchAll from "../../../hooks/useFetchAll";
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function FriendAndMessage({ userId }) {
   const { token, user } = useAppContext();
@@ -15,16 +15,16 @@ function FriendAndMessage({ userId }) {
     },
   };
   const friendRequestsURI =
-    SERVER_URL + "/users/" + user.id + "/requests" + "?senderId=" + userId;
+    SERVER_API_URL + "/users/" + user.id + "/requests" + "?senderId=" + userId;
   const sentRequestsURI =
-    SERVER_URL +
+    SERVER_API_URL +
     "/users/" +
     user.id +
     "/requests/sent" +
     "?receiverId=" +
     userId;
   const myFriendsURI =
-    SERVER_URL + "/users/" + user.id + "/friends" + "?friendId=" + userId;
+    SERVER_API_URL + "/users/" + user.id + "/friends" + "?friendId=" + userId;
   const { data, loading } = useFetchAll([
     [friendRequestsURI, opts],
     [sentRequestsURI, opts],

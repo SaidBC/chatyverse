@@ -6,7 +6,7 @@ import Button from "../../../../components/Buttons/Button";
 import axios from "axios";
 import AvatarImage from "../../../../components/AvatarImage";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function AvatarForm({ profilePicture, userId, token }) {
   const [showAlert, setShowAlert] = useState({
@@ -37,7 +37,7 @@ function AvatarForm({ profilePicture, userId, token }) {
     data.set("avatar", file);
 
     axios
-      .post(SERVER_URL + "/users/" + userId + "/upload", data, {
+      .post(SERVER_API_URL + "/users/" + userId + "/upload", data, {
         headers: {
           Authorization: "Bearer " + token,
         },

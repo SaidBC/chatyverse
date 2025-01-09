@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import axios from "axios";
 import { useState } from "react";
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 function SearchBox({ setSearch }) {
   const [input, setInput] = useState("");
   const handleSearch = async (e) => {
     if (e.target.value.length > 0) {
       axios
-        .get(SERVER_URL + "/users?username=" + e.target.value)
+        .get(SERVER_API_URL + "/users?username=" + e.target.value)
         .then((res) => {
           if (res.status !== 200)
             return alert("Error while searching for users");

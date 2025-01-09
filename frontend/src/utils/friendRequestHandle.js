@@ -1,7 +1,7 @@
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 const friendRequestHandle = async function (path, token, setShowAlert) {
-  const requestUrl = SERVER_URL + path;
+  const requestUrl = SERVER_API_URL + path;
   try {
     const res = await fetch(requestUrl, {
       method: "POST",

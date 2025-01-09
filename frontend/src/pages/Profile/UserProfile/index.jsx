@@ -10,7 +10,7 @@ import NotFoundError from "../../../components/Errors/NotFoundError";
 import Loading from "../../../components/Loading";
 import InternalServerError from "../../../components/Errors/InternalServerError";
 import useAppContext from "../../../hooks/useAppContext";
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function UserProfile() {
   const [search] = useSearchParams();
@@ -23,7 +23,7 @@ function UserProfile() {
     loading,
     setData,
     setLoading,
-  } = useFetch(SERVER_URL + `/users/${userId}`, {}, [userId]);
+  } = useFetch(SERVER_API_URL + `/users/${userId}`, {}, [userId]);
   if (loading) return <Loading />;
   if (error) {
     if (error.message === "Failed to fetch")

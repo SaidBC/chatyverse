@@ -6,7 +6,7 @@ import useAppContext from "../../../hooks/useAppContext";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 function Login() {
   const navigate = useNavigate();
   const { setToken } = useAppContext();
@@ -23,7 +23,7 @@ function Login() {
     const errors = validateForm(form);
     if (errors.length) return checkErrors(errors, form);
 
-    const res = await fetch(SERVER_URL + "/auth/login", {
+    const res = await fetch(SERVER_API_URL + "/auth/login", {
       method: "POST",
       body: JSON.stringify({
         username: username.value,

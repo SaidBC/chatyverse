@@ -5,7 +5,7 @@ import checkErrors from "../../../utils/checkErrors";
 import useAppContext from "../../../hooks/useAppContext";
 import FormInput from "../../../components/Inputs/FormInput";
 import Button from "../../../components/Buttons/Button";
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function Signup() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ function Signup() {
     const errors = validateForm(form);
     checkErrors(errors, form);
     if (errors.length) return checkErrors(errors, form);
-    const res = await fetch(SERVER_URL + "/auth/signup", {
+    const res = await fetch(SERVER_API_URL + "/auth/signup", {
       method: "POST",
       body: JSON.stringify({
         email: email.value,

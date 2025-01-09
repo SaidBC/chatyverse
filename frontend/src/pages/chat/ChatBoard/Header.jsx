@@ -1,14 +1,14 @@
 import useFetch from "../../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import IconButton from "../../../components/Buttons/IconButton";
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function Header() {
   const { friendId } = useParams();
   const {
     data: { data: friend },
     loading,
-  } = useFetch(SERVER_URL + "/users/" + friendId);
+  } = useFetch(SERVER_API_URL + "/users/" + friendId);
   if (loading) return <>Loading</>;
   return (
     <header className="flex items-center gap-4  py-4 px-6  border-b-[1px] border-white/25">

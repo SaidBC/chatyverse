@@ -8,7 +8,7 @@ const saveHelper = async function (
   setToken,
   setShowAlert
 ) {
-  const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+  const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
   const errors = validateForm(form);
   if (errors.length) return checkErrors(errors, form);
   for (const key in form) {
@@ -17,7 +17,7 @@ const saveHelper = async function (
     }
     form[key] = form[key].value;
   }
-  const res = await fetch(SERVER_URL + "/users/" + userId, {
+  const res = await fetch(SERVER_API_URL + "/users/" + userId, {
     method: "PATCH",
     body: JSON.stringify(form),
     headers: {

@@ -10,7 +10,7 @@ import Loading from "../../../../components/Loading";
 import UsernameForm from "./UsernameForm";
 import InternalServerError from "../../../../components/Errors/InternalServerError";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
+const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function EditProfile() {
   const { setToken, user: User, token } = useAppContext();
@@ -19,7 +19,7 @@ function EditProfile() {
     data: { data: user },
     error,
     loading,
-  } = useFetch(SERVER_URL + `/users/${userId}`);
+  } = useFetch(SERVER_API_URL + `/users/${userId}`);
   if (loading) return <Loading />;
   if (error) {
     if (error.message === "Failed to fetch")
