@@ -5,7 +5,7 @@ import checkErrors from "../../../utils/checkErrors";
 import useAppContext from "../../../hooks/useAppContext";
 import FormInput from "../../../components/Inputs/FormInput";
 import Button from "../../../components/Buttons/Button";
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function Signup() {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import axios from "axios";
 import { useState } from "react";
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
 function SearchBox({ setSearch }) {
   const [input, setInput] = useState("");
   const handleSearch = async (e) => {

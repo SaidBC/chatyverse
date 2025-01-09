@@ -6,7 +6,7 @@ import Button from "../../../../components/Buttons/Button";
 import axios from "axios";
 import AvatarImage from "../../../../components/AvatarImage";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function AvatarForm({ profilePicture, userId, token }) {
   const [showAlert, setShowAlert] = useState({

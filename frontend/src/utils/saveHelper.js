@@ -8,7 +8,7 @@ const saveHelper = async function (
   setToken,
   setShowAlert
 ) {
-  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+  const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
   const errors = validateForm(form);
   if (errors.length) return checkErrors(errors, form);
   for (const key in form) {

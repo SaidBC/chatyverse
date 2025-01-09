@@ -10,7 +10,7 @@ import NotFoundError from "../../../components/Errors/NotFoundError";
 import Loading from "../../../components/Loading";
 import InternalServerError from "../../../components/Errors/InternalServerError";
 import useAppContext from "../../../hooks/useAppContext";
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function UserProfile() {
   const [search] = useSearchParams();

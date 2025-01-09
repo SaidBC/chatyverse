@@ -10,7 +10,7 @@ import Loading from "../../../../components/Loading";
 import UsernameForm from "./UsernameForm";
 import InternalServerError from "../../../../components/Errors/InternalServerError";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function EditProfile() {
   const { setToken, user: User, token } = useAppContext();
