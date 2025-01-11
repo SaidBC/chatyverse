@@ -1,13 +1,13 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
 import saveHelper from "../../../utils/saveHelper";
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 import AlertPopup from "../../../components/AlertPopup";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
 function ChangePassword() {
-  const { setToken, user, token } = useAppContext();
+  const { user, token } = useAuthContext();
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
@@ -37,7 +37,7 @@ function ChangePassword() {
       confirmNewPassword,
       setConfirmNewPassword,
     };
-    saveHelper(form, userId, token, setToken, setShowAlert);
+    saveHelper(form, userId, setShowAlert);
   };
   return (
     <div className="bg-gray-900 w-full xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 import IconButton from "../../../components/Buttons/IconButton";
 import FriendsList from "./FriendsList";
 
 function FriendsModal({ onCloseModal, isModelOpen, userId }) {
-  const { token } = useAppContext();
+  const { token } = useAuthContext();
   useEffect(() => {
     const onCloseWithKey = (e) => {
       if (e.key === "Escape") return onCloseModal();

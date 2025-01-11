@@ -2,14 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import validateForm from "../../../utils/validateForm";
 import checkErrors from "../../../utils/checkErrors";
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 import FormInput from "../../../components/Inputs/FormInput";
 import Button from "../../../components/Buttons/Button";
+import AuthApi from "../AuthApi";
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function Signup() {
   const navigate = useNavigate();
-  const { setToken } = useAppContext();
+  const { setToken } = useAuthContext();
   const [email, setEmail] = useState({ value: "", errorMessage: "" });
   const [username, setUsername] = useState({ value: "", errorMessage: "" });
   const [confirmPassword, setConfirmPassword] = useState({
@@ -30,27 +31,7 @@ function Signup() {
       setPassword,
       setUsername,
     };
-    const errors = validateForm(form);
-    checkErrors(errors, form);
-    if (errors.length) return checkErrors(errors, form);
-    const res = await fetch(SERVER_API_URL + "/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email.value,
-        username: username.value,
-        password: password.value,
-      }),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    if (res.status === 400) {
-      const { errors } = (await res.json()).error;
-      return checkErrors(errors, form);
-    }
-    const token = (await res.json()).data;
-    setToken(token);
-    navigate("/profile");
+    AuthApi.signup(form, setToken);
   };
 
   return (

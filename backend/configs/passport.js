@@ -3,8 +3,17 @@ const { ExtractJwt, Strategy } = require("passport-jwt");
 const prisma = require("../utils/prisma");
 
 const opts = {};
+
 opts.secretOrKey = process.env.JWT_SECRET || "secret";
-opts.jwtFromRequest = new ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = (req) => {
+  let jwt = null;
+  if (req && req.cookies && req.route.path.endsWith("refreshToken")) {
+    jwt = req.cookies["refreshToken"];
+  } else {
+    return ExtractJwt.fromAuthHeaderAsBearerToken()(req);
+  }
+  return jwt;
+};
 
 passport.use(
   new Strategy(opts, async function (payload, done) {

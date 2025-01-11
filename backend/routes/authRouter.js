@@ -1,4 +1,9 @@
-const { signup, login } = require("../controller/authController");
+const {
+  signup,
+  login,
+  refreshUserToken,
+} = require("../controller/authController");
+const auth = require("../middlewares/auth");
 const errorHandler = require("../middlewares/errorHanldler");
 const isUserExists = require("../middlewares/isUserExists");
 const validatorErrorHandler = require("../middlewares/validatorErrorHandler");
@@ -22,6 +27,12 @@ authRouter.post(
   validatorErrorHandler,
   login
 );
+
+authRouter.get("/auth/refreshToken", auth, refreshUserToken);
+
+authRouter.get("/auth/protected", auth, (req, res) => {
+  res.json({ success: true, data: "Hello There!", user: req.user });
+});
 
 authRouter.use(errorHandler);
 

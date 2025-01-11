@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 import FriendsList from "../../Profile/UserProfile/FriendsList";
 import LastMessagesList from "./LastMessages";
 import SearchResults from "./SearchResults";
 
 function ChatBoxes({ userId, isSearching, results }) {
-  const { token } = useAppContext();
+  const { token } = useAuthContext();
   return (
     <ul className="flex flex-col gap-2  w-full overflow-y-auto grow-1">
       {!isSearching && (

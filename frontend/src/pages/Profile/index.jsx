@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import Nav from "./Nav";
-import useAppContext from "../../hooks/useAppContext";
+import useAuthContext from "../../hooks/useAuthContext";
 
 function Profile() {
-  const { user, isConnected } = useAppContext();
+  const { user, isConnected } = useAuthContext();
   if (!isConnected) return <>Connecting ...</>;
   return (
     <div className="flex min-h-[100dvh]">

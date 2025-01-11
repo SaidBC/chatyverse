@@ -1,10 +1,9 @@
 import Login from "../pages/auth/login";
 import Signup from "../pages/auth/signup";
-import IsAuth from "../IsAuth";
 import Auth from "../pages/auth";
 import Profile from "../pages/Profile";
 import UserProfile from "../pages/Profile/UserProfile";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import ChangeEmail from "../pages/Profile/settings/ChangeEmail";
 import ChangePassword from "../pages/Profile/settings/ChangePassword";
 import ChangeTheme from "../pages/Profile/settings/ChangeTheme";
@@ -12,81 +11,78 @@ import EditProfile from "../pages/Profile/settings/EditProfile";
 import Chat from "../pages/chat";
 import ChatBoard from "../pages/chat/ChatBoard";
 import NoChat from "../pages/chat/ChatBoard/NoChat";
+import AuthProvider from "../AuthProvider";
+import PageNotFoundError from "../components/Errors/PageNotFoundError";
 
 const routes = [
   {
-    path: "*",
-    element: <IsAuth path="*" />,
-  },
-  {
-    path: "/chat",
-    element: (
-      <IsAuth path="/chat">
-        <Chat />
-      </IsAuth>
-    ),
+    path: "/",
+    element: <AuthProvider />,
+    errorElement: <PageNotFoundError />,
     children: [
       {
         index: true,
-        element: <NoChat />,
+        element: <Navigate to="/auth/login" />,
       },
       {
-        path: ":friendId",
-        element: <ChatBoard />,
-      },
-    ],
-  },
-  {
-    path: "/profile",
-    element: (
-      <IsAuth path="/profile">
-        <Profile />
-      </IsAuth>
-    ),
-    children: [
-      {
-        index: true,
-        element: <UserProfile />,
-      },
-      {
-        path: "settings",
-        element: <Outlet />,
+        path: "/chat",
+        element: <Chat />,
         children: [
           {
-            path: "profile",
-            element: <EditProfile />,
+            index: true,
+            element: <NoChat />,
           },
           {
-            path: "email",
-            element: <ChangeEmail />,
-          },
-          {
-            path: "password",
-            element: <ChangePassword />,
-          },
-          {
-            path: "theme",
-            element: <ChangeTheme />,
+            path: ":friendId",
+            element: <ChatBoard />,
           },
         ],
       },
-    ],
-  },
-  {
-    path: "/auth",
-    element: (
-      <IsAuth path="/auth">
-        <Auth />
-      </IsAuth>
-    ),
-    children: [
       {
-        path: "login",
-        element: <Login />,
+        path: "/profile",
+        element: <Profile />,
+        children: [
+          {
+            index: true,
+            element: <UserProfile />,
+          },
+          {
+            path: "settings",
+            element: <Outlet />,
+            children: [
+              {
+                path: "profile",
+                element: <EditProfile />,
+              },
+              {
+                path: "email",
+                element: <ChangeEmail />,
+              },
+              {
+                path: "password",
+                element: <ChangePassword />,
+              },
+              {
+                path: "theme",
+                element: <ChangeTheme />,
+              },
+            ],
+          },
+        ],
       },
       {
-        path: "signup",
-        element: <Signup />,
+        path: "/auth",
+        element: <Auth />,
+        children: [
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "signup",
+            element: <Signup />,
+          },
+        ],
       },
     ],
   },

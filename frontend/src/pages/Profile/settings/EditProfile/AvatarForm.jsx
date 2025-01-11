@@ -46,7 +46,6 @@ function AvatarForm({ profilePicture, userId, token }) {
       onUploadProgress: (progressEvent) => {
         const uploadedPercentage =
           (progressEvent.loaded / progressEvent.total) * 100;
-        console.log(uploadedPercentage);
         setUploadProgress(uploadedPercentage.toFixed(2));
       },
     };

@@ -4,7 +4,7 @@ import AboutForm from "./AboutForm";
 import AvatarForm from "./AvatarForm";
 import useFetch from "../../../../hooks/useFetch";
 import saveHelper from "../../../../utils/saveHelper";
-import useAppContext from "../../../../hooks/useAppContext";
+import useAuthContext from "../../../../hooks/useAuthContext";
 import NotFoundError from "../../../../components/Errors/NotFoundError";
 import Loading from "../../../../components/Loading";
 import UsernameForm from "./UsernameForm";
@@ -13,7 +13,7 @@ import InternalServerError from "../../../../components/Errors/InternalServerErr
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function EditProfile() {
-  const { setToken, user: User, token } = useAppContext();
+  const { user: User, token } = useAuthContext();
   const userId = Number(User.id);
   const {
     data: { data: user },
@@ -33,7 +33,7 @@ function EditProfile() {
     const { setShowAlert, ...form } = data;
     return function (e) {
       e.preventDefault();
-      saveHelper(form, userId, token, setToken, setShowAlert);
+      saveHelper(form, userId, setShowAlert);
     };
   };
 

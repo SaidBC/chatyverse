@@ -5,25 +5,20 @@ import useLocalStorage from "./hooks/useLocalStorage.js";
 import decodeToken from "./utils/decodeToken.js";
 import useConnnectUser from "./hooks/useConnectUser.js";
 import AppContext from "./contexts/AppContext.jsx";
+import useAuth from "./hooks/useAuth.js";
 
 const router = createBrowserRouter(routes);
 
 function App() {
-  const [token, setToken] = useLocalStorage("token", null);
-  const [user, setUser] = useLocalStorage("user", null);
-  const { isConnected } = useConnnectUser({ token, userId: user?.id });
-  useEffect(() => {
-    if (token) {
-      setUser(decodeToken(token));
-    }
-    if (!token && user) setUser(null);
-  }, [token]);
-  const value = useMemo(
-    () => ({ token, setToken, user, setUser, isConnected }),
-    [token, setToken, user, setUser, isConnected]
-  );
+  // const { isConnected } = useConnnectUser({ token, userId: user?.id });
+  // useEffect(() => {
+  //   if (token) {
+  //     setUser(decodeToken(token));
+  //   }
+  //   if (!token && user) setUser(null);
+  // }, [token]);
   return (
-    <AppContext.Provider value={value}>
+    <AppContext.Provider value={null}>
       <RouterProvider router={router} />
     </AppContext.Provider>
   );

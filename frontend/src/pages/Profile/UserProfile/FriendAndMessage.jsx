@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { Link } from "react-router-dom";
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 import VariantStatsFriendBtn from "./VariantStatsFriendBtn";
 import useFetchAll from "../../../hooks/useFetchAll";
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function FriendAndMessage({ userId }) {
-  const { token, user } = useAppContext();
+  const { token, user } = useAuthContext();
   const opts = {
     method: "GET",
     headers: {

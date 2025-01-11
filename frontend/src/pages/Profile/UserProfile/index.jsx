@@ -9,12 +9,12 @@ import FriendAndMessage from "./FriendAndMessage";
 import NotFoundError from "../../../components/Errors/NotFoundError";
 import Loading from "../../../components/Loading";
 import InternalServerError from "../../../components/Errors/InternalServerError";
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function UserProfile() {
   const [search] = useSearchParams();
-  const { user: User } = useAppContext();
+  const { user: User } = useAuthContext();
   const userId = Number(search.get("id")) || Number(User.id);
   const isMyProfile = search.get("id") == User.id || !search.get("id");
   const {

@@ -1,12 +1,12 @@
 import { Outlet, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
-import useAppContext from "../../hooks/useAppContext";
+import useAuthContext from "../../hooks/useAuthContext";
 
 function Chat() {
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
-  const { token, user, isConnected } = useAppContext();
+  const { token, user, isConnected } = useAuthContext();
   useEffect(() => {
     if (location.pathname.split("/")[2] && window.innerWidth < 768)
       setShowNav(false);

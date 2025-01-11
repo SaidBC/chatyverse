@@ -1,12 +1,10 @@
-import useAppContext from "../../../hooks/useAppContext";
+import useAuthContext from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import IconicButton from "../../../components/Buttons/IconicButton";
 
 function LogoutBtn() {
-  const { setToken } = useAppContext();
   const navigate = useNavigate();
   const logoutHandle = function () {
-    setToken(null);
     navigate("/auth/login");
   };
   return (
