@@ -37,7 +37,7 @@ function ChangePassword() {
       confirmNewPassword,
       setConfirmNewPassword,
     };
-    saveHelper(form, userId, setShowAlert);
+    saveHelper(form, userId, token, setShowAlert);
   };
   return (
     <div className="bg-gray-900 w-full xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">

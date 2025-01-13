@@ -7,7 +7,7 @@ import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
 
 function ChangeEmail() {
-  const { user } = useAuthContext();
+  const { user, token } = useAuthContext();
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
@@ -37,7 +37,7 @@ function ChangeEmail() {
       newEmail,
       setNewEmail,
     };
-    saveHelper(form, userId, setShowAlert);
+    saveHelper(form, userId, token, setShowAlert);
   };
 
   return (

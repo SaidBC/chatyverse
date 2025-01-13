@@ -1,7 +1,7 @@
 import checkErrors from "./checkErrors";
 import validateForm from "./validateForm";
 
-const saveHelper = async function (form, userId, setShowAlert) {
+const saveHelper = async function (form, userId, token, setShowAlert) {
   const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
   const errors = validateForm(form);
   if (errors.length) return checkErrors(errors, form);
@@ -16,6 +16,7 @@ const saveHelper = async function (form, userId, setShowAlert) {
     body: JSON.stringify(form),
     headers: {
       "content-type": "application/json",
+      authorization: "Bearer " + token,
     },
   });
   if (res.status === 401) {

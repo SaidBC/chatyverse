@@ -33,7 +33,7 @@ function EditProfile() {
     const { setShowAlert, ...form } = data;
     return function (e) {
       e.preventDefault();
-      saveHelper(form, userId, setShowAlert);
+      saveHelper(form, userId, token, setShowAlert);
     };
   };
 
