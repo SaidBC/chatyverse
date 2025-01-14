@@ -13,7 +13,8 @@ const login = asyncHandler(async function (req, res) {
   });
   res.cookie("refreshToken", refreshToken, {
     maxAge: 2592000000,
-    sameSite: "none",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
     httpOnly: true,
   });
   res.json({ success: true, data: accessToken });
@@ -30,7 +31,8 @@ const signup = asyncHandler(async function (req, res) {
   });
   res.cookie("refreshToken", refreshToken, {
     maxAge: 2592000000,
-    sameSite: "none",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
     httpOnly: true,
   });
   res.json({ success: true, data: accessToken });
