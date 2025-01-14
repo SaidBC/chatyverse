@@ -11,7 +11,6 @@ const login = asyncHandler(async function (req, res) {
   const accessToken = jwt.sign({ id, username }, JWT_SECRET, {
     expiresIn: "15m",
   });
-  console.log(process.env.NODE_ENV);
   res.cookie("refreshToken", refreshToken, {
     maxAge: 2592000000,
     secure: process.env.NODE_ENV === "production",
