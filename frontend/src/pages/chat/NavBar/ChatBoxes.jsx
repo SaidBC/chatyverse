@@ -11,9 +11,6 @@ function ChatBoxes({ userId, isSearching, results }) {
       {!isSearching && (
         <>
           <li>
-            <h1 className="text-xl font-extrabold text-slate-200">
-              Last Messages :
-            </h1>
             <LastMessagesList userId={userId} token={token} />
           </li>
           <li>

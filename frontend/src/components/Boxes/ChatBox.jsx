@@ -48,6 +48,8 @@ function ChatBox({
                 ? "Empty message"
                 : lastMessage.content === null
                 ? "No messages sent"
+                : lastMessage.content.length > 20
+                ? lastMessage.content.slice(0, 20) + "..."
                 : lastMessage.content}
             </span>
           </div>
