@@ -38,7 +38,7 @@ function ChangePassword() {
       confirmNewPassword,
       setConfirmNewPassword,
     };
-    Api.saveProfile(form, userId, token, setShowAlert);
+    Api.saveProfile(form, userId, token, setShowAlert, setLoading);
   };
   return (
     <div className="bg-gray-900 w-full xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">
