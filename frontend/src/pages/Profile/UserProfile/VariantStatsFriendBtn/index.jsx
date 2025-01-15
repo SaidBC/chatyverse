@@ -1,5 +1,4 @@
 import { useState } from "react";
-import friendRequestHandle from "../../../../utils/friendRequestHandle";
 import PropTypes from "prop-types";
 import AddBtn from "./AddBtn";
 import MultipleBtnsWrapper from "./MultipleBtnsWrapper";
@@ -8,8 +7,10 @@ import AcceptBtn from "./AcceptBtn";
 import DeclineBtn from "./DeclineBtn";
 import FriendsBtn from "./FriendsBtn";
 import AlertPopup from "../../../../components/AlertPopup";
+import Api from "../../../../api";
 
 function VariantStatsFriendBtn({ token, userId, type }) {
+  const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState({
     isPopped: false,
     title: "",
@@ -19,23 +20,40 @@ function VariantStatsFriendBtn({ token, userId, type }) {
   const handleClick = function (path) {
     return function (e) {
       e.preventDefault();
-      !showAlert.isPopped && friendRequestHandle(path, token, setShowAlert);
+      !showAlert.isPopped &&
+        Api.friendRequest(path, token, setShowAlert, setLoading);
     };
   };
   return (
     <>
       {type === "none" && (
-        <AddBtn receiverId={userId} handleClick={handleClick} />
+        <AddBtn
+          loading={loading}
+          receiverId={userId}
+          handleClick={handleClick}
+        />
       )}
       {type === "request" && (
         <MultipleBtnsWrapper title="Accept Friend">
-          <AcceptBtn handleClick={handleClick} senderId={userId} />
-          <DeclineBtn handleClick={handleClick} senderId={userId} />
+          <AcceptBtn
+            loading={loading}
+            handleClick={handleClick}
+            senderId={userId}
+          />
+          <DeclineBtn
+            loading={loading}
+            handleClick={handleClick}
+            senderId={userId}
+          />
         </MultipleBtnsWrapper>
       )}
       {type === "sent" && (
         <MultipleBtnsWrapper title="Sent Friend">
-          <CancelBtn handleClick={handleClick} receiverId={userId} />
+          <CancelBtn
+            loading={loading}
+            handleClick={handleClick}
+            receiverId={userId}
+          />
         </MultipleBtnsWrapper>
       )}
       {type === "friend" && <FriendsBtn />}

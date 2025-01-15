@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import IconicButton from "../../../../components/Buttons/IconicButton";
 
-function CancelBtn({ receiverId, handleClick }) {
+function CancelBtn({ receiverId, handleClick, loading }) {
   const {
     user: { id: senderId },
   } = useOutletContext();
@@ -13,7 +13,7 @@ function CancelBtn({ receiverId, handleClick }) {
       name="fa-solid fa-xmark"
       className="bg-red-500 hover:bg-red-600 px-8"
     >
-      Cancel
+      {loading ? "Cancelling..." : "Cancel"}
     </IconicButton>
   );
 }

@@ -172,6 +172,38 @@ class Api {
       setLoading(false);
     }
   }
+  static async friendRequest(path, token, setShowAlert, setLoading) {
+    setLoading(true);
+    console.log(token);
+    const configs = {
+      headers: {
+        authorization: "Bearer " + token,
+      },
+    };
+    try {
+      const res = await axios.post(path, {}, configs);
+      if (res.data.success) {
+        setShowAlert(this.#createAlert("Success", res.data.data, "success"));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      if (!error.response.data.success)
+        setShowAlert(
+          this.#createAlert(
+            "Failed",
+            error.response.data.error.message,
+            "error"
+          )
+        );
+      setShowAlert(
+        this.#createAlert("Failed", "An unexpected error occurred", "error")
+      );
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
 }
 
 export default Api;
