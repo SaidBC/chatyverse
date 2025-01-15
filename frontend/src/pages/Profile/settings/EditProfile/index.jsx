@@ -3,12 +3,12 @@ import BioForm from "./BioForm";
 import AboutForm from "./AboutForm";
 import AvatarForm from "./AvatarForm";
 import useFetch from "../../../../hooks/useFetch";
-import saveHelper from "../../../../utils/saveHelper";
 import useAuthContext from "../../../../hooks/useAuthContext";
 import NotFoundError from "../../../../components/Errors/NotFoundError";
 import Loading from "../../../../components/Loading";
 import UsernameForm from "./UsernameForm";
 import InternalServerError from "../../../../components/Errors/InternalServerError";
+import Api from "../../../../api";
 
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
@@ -30,10 +30,10 @@ function EditProfile() {
   }
   const { birthday, location, bio, username, profilePicture } = user;
   const handleSave = function (data) {
-    const { setShowAlert, ...form } = data;
+    const { setShowAlert, setLoading, ...form } = data;
     return function (e) {
       e.preventDefault();
-      saveHelper(form, userId, token, setShowAlert);
+      Api.saveProfile(form, userId, token, setShowAlert, setLoading);
     };
   };
 

@@ -10,6 +10,7 @@ function AboutForm({
   birthday: birthdayInitial,
   location: locationInitial,
 }) {
+  const [loading, setLoading] = useState(false);
   const [birthday, setBirthday] = useState({
     value: birthdayInitial?.slice(0, 10) || "",
     errorMessage: "",
@@ -57,9 +58,10 @@ function AboutForm({
             location,
             setLocation,
             setShowAlert,
+            setLoading,
           })}
         >
-          SAVE
+          {loading ? "Saving..." : "SAVE"}
         </Button>
       </form>
       {showAlert.isPopped && (

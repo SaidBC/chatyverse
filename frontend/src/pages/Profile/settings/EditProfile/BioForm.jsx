@@ -6,6 +6,7 @@ import AlertPopup from "../../../../components/AlertPopup";
 import Button from "../../../../components/Buttons/Button";
 
 function BioForm({ handleSave, bio: bioInitial }) {
+  const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState({
     value: bioInitial || "",
     errorMessage: "",
@@ -39,8 +40,8 @@ function BioForm({ handleSave, bio: bioInitial }) {
           ></textarea>
           {bio.errorMessage && <ErrorText content={bio.errorMessage} />}
         </div>
-        <Button onClick={handleSave({ bio, setBio, setShowAlert })}>
-          SAVE
+        <Button onClick={handleSave({ bio, setBio, setShowAlert, setLoading })}>
+          {loading ? "Saving..." : "SAVE"}
         </Button>
       </form>
       {showAlert.isPopped && (

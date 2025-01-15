@@ -5,6 +5,7 @@ import Button from "../../../../components/Buttons/Button";
 import AlertPopup from "../../../../components/AlertPopup";
 
 function UsernameForm({ username: initialUsername, handleSave }) {
+  const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState({
     isPopped: false,
     title: "",
@@ -26,8 +27,16 @@ function UsernameForm({ username: initialUsername, handleSave }) {
         errorMessage={username.errorMessage}
         value={username.value}
       />
-      <Button onClick={handleSave({ username, setUsername, setShowAlert })}>
-        SAVE
+      <Button
+        onClick={handleSave({
+          username,
+          setUsername,
+          setShowAlert,
+          setLoading,
+        })}
+        disabled={loading}
+      >
+        {loading ? "Saving..." : "SAVE"}
       </Button>
       {showAlert.isPopped && (
         <AlertPopup alert={showAlert} setShowAlert={setShowAlert} />

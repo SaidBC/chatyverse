@@ -1,13 +1,14 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
-import saveHelper from "../../../utils/saveHelper";
 import useAuthContext from "../../../hooks/useAuthContext";
 import AlertPopup from "../../../components/AlertPopup";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
+import Api from "../../../api";
 
 function ChangeEmail() {
   const { user, token } = useAuthContext();
+  const [loading, setLoading] = useState(false);
   const userId = user.id;
   const [password, setPassword] = useState({
     value: "",
@@ -37,7 +38,7 @@ function ChangeEmail() {
       newEmail,
       setNewEmail,
     };
-    saveHelper(form, userId, token, setShowAlert);
+    Api.saveProfile(form, userId, token, setShowAlert, setLoading);
   };
 
   return (
@@ -75,7 +76,7 @@ function ChangeEmail() {
             errorMessage={newEmail.errorMessage}
             value={newEmail.value}
           />
-          <Button onClick={handleSave}>SAVE</Button>
+          <Button onClick={handleSave}>{loading ? "Saving..." : "SAVE"}</Button>
         </form>
         {showAlert.isPopped && (
           <AlertPopup alert={showAlert} setShowAlert={setShowAlert} />

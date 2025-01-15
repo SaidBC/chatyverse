@@ -14,7 +14,7 @@ const login = asyncHandler(async function (req, res) {
   res.cookie("refreshToken", refreshToken, {
     maxAge: 2592000000,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
+    sameSite: "lax",
     httpOnly: true,
   });
   res.json({ success: true, data: accessToken });
@@ -32,7 +32,7 @@ const signup = asyncHandler(async function (req, res) {
   res.cookie("refreshToken", refreshToken, {
     maxAge: 2592000000,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
+    sameSite: "lax",
     httpOnly: true,
   });
   res.json({ success: true, data: accessToken });

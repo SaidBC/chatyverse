@@ -1,18 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import validateForm from "../../../utils/validateForm";
-import checkErrors from "../../../utils/checkErrors";
 import useAuthContext from "../../../hooks/useAuthContext";
 import FormInput from "../../../components/Inputs/FormInput";
 import Button from "../../../components/Buttons/Button";
-import AuthApi from "../AuthApi";
-const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+import Api from "../../../api";
 
 function Signup() {
   const navigate = useNavigate();
   const { setToken } = useAuthContext();
   const [email, setEmail] = useState({ value: "", errorMessage: "" });
   const [username, setUsername] = useState({ value: "", errorMessage: "" });
+  const [loading, setLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState({
     value: "",
     errorMessage: "",
@@ -31,7 +29,7 @@ function Signup() {
       setPassword,
       setUsername,
     };
-    AuthApi.signup(form, setToken);
+    Api.signup(form, setToken, setLoading);
   };
 
   return (
@@ -76,7 +74,9 @@ function Signup() {
           setInput={setConfirmPassword}
           errorMessage={confirmPassword.errorMessage}
         />
-        <Button onClick={signupHandle}>Sign up</Button>
+        <Button onClick={signupHandle}>
+          {loading ? "Signing up..." : "Sign up"}
+        </Button>
         <p>
           Already have an account ? &nbsp;
           <Link className="text-indigo-400 hover:text-indigo-500" to="../login">

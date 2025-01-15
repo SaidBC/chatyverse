@@ -1,12 +1,13 @@
 import { SlIcon } from "@shoelace-style/shoelace/dist/react";
 import { useState } from "react";
-import saveHelper from "../../../utils/saveHelper";
 import useAuthContext from "../../../hooks/useAuthContext";
 import AlertPopup from "../../../components/AlertPopup";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
+import Api from "../../../api";
 
 function ChangePassword() {
+  const [loading, setLoading] = useState(false);
   const { user, token } = useAuthContext();
   const userId = user.id;
   const [password, setPassword] = useState({
@@ -27,7 +28,7 @@ function ChangePassword() {
     content: "",
     variant: "",
   });
-  const handleSave = function (e) {
+  const handleSave = async function (e) {
     e.preventDefault();
     const form = {
       password,
@@ -37,7 +38,7 @@ function ChangePassword() {
       confirmNewPassword,
       setConfirmNewPassword,
     };
-    saveHelper(form, userId, token, setShowAlert);
+    Api.saveProfile(form, userId, token, setShowAlert);
   };
   return (
     <div className="bg-gray-900 w-full xsm:w-11/12 mt-10 flex flex-col gap-10 p-8">
@@ -74,7 +75,9 @@ function ChangePassword() {
             type="password"
             value={confirmNewPassword.value}
           />
-          <Button onClick={handleSave}>SAVE</Button>
+          <Button onClick={handleSave} disabled={loading}>
+            {loading ? "Saving..." : "SAVE"}
+          </Button>
         </form>
         {showAlert.isPopped && (
           <AlertPopup alert={showAlert} setShowAlert={setShowAlert} />

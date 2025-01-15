@@ -1,19 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import checkErrors from "../../../utils/checkErrors";
-import validateForm from "../../../utils/validateForm";
 import Button from "../../../components/Buttons/Button";
 import FormInput from "../../../components/Inputs/FormInput";
-import AuthApi from "../AuthApi";
+import Api from "../../../api";
 import useAuthContext from "../../../hooks/useAuthContext";
-const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function Login() {
   const navigate = useNavigate();
   const { setToken } = useAuthContext();
   const [username, setUsername] = useState({ value: "", errorMessage: "" });
   const [password, setPassword] = useState({ value: "", errorMessage: "" });
-  const loginHandle = async function (e) {
+  const [loading, setLoading] = useState(false);
+  const loginHandle = function (e) {
     e.preventDefault();
     const form = {
       username,
@@ -21,7 +19,7 @@ function Login() {
       setPassword,
       setUsername,
     };
-    await AuthApi.login(form, setToken);
+    Api.login(form, setToken, setLoading);
   };
   return (
     <div className="bg-gray-900 p-8 rounded-lg w-full max-w-[31.25rem] shadow-2xl">
@@ -45,7 +43,9 @@ function Login() {
           placeholder="Enter your password"
           errorMessage={password.errorMessage}
         />
-        <Button onClick={loginHandle}>Login</Button>
+        <Button onClick={loginHandle}>
+          {loading ? "Logging in..." : "Login"}
+        </Button>
         <p>
           Dont have an account ? &nbsp;
           <Link
