@@ -46,8 +46,14 @@ const refreshUserToken = asyncHandler(function (req, res) {
   res.json({ success: true, data: accessToken });
 });
 
+const logout = asyncHandler(function (req, res) {
+  res.clearCookie("refreshToken");
+  res.json({ success: true });
+});
+
 module.exports = {
   login,
   signup,
   refreshUserToken,
+  logout,
 };

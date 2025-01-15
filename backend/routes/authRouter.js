@@ -2,6 +2,7 @@ const {
   signup,
   login,
   refreshUserToken,
+  logout,
 } = require("../controller/authController");
 const auth = require("../middlewares/auth");
 const errorHandler = require("../middlewares/errorHanldler");
@@ -33,6 +34,8 @@ authRouter.get("/auth/refreshToken", auth, refreshUserToken);
 authRouter.get("/auth/protected", auth, (req, res) => {
   res.json({ success: true, data: "Hello There!", user: req.user });
 });
+
+authRouter.get("/auth/logout", auth, logout);
 
 authRouter.use(errorHandler);
 

@@ -1,11 +1,15 @@
 import useAuthContext from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import IconicButton from "../../../components/Buttons/IconicButton";
+import Api from "../../../api";
+import { useState } from "react";
 
 function LogoutBtn() {
+  const { token, setToken } = useAuthContext();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const logoutHandle = function () {
-    navigate("/auth/login");
+    Api.logout(token, setToken, setLoading, navigate);
   };
   return (
     <IconicButton
@@ -14,7 +18,7 @@ function LogoutBtn() {
       className="bg-red-500 hover:bg-red-600 px-8"
       name="box-arrow-left"
     >
-      Logout
+      {loading ? "Logging out..." : "Logout"}
     </IconicButton>
   );
 }

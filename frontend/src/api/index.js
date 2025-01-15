@@ -87,6 +87,30 @@ class Api {
     }
   }
 
+  static async logout(token, setToken, setLoading, navigate) {
+    setLoading(true);
+    try {
+      const res = await axios.get("/auth/logout", {
+        headers: {
+          authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        setToken(null);
+        navigate("/auth/login");
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Logout error:", error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   static #preSave(form, token) {
     const errors = validateForm(form);
     if (errors.length) {
