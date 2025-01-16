@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../../../hooks/useAuthContext";
 import VariantStatsFriendBtn from "./VariantStatsFriendBtn";
 import useFetchAll from "../../../hooks/useFetchAll";
+import Wrapper from "../../../components/Wrapper";
 const SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 function FriendAndMessage({ userId }) {
